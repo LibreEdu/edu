@@ -1,0 +1,932 @@
+%%!TEX TS-program = latex
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc} % UTF-8
+\usepackage[T1]{fontenc}
+\usepackage{lmodern} % Prévient un bug d'affichage evince lié à [T1]{fontenc}
+\usepackage[frenchb]{babel} % francisation
+\usepackage{adjustbox}
+\usepackage[fleqn]{amsmath} % aligne le mode maths à gauche
+\usepackage{amssymb} % the amsfont symbols
+\usepackage[table, usenames, svgnames]{xcolor} % Couleurs
+\usepackage{multicol} % Multi-colonnes
+\usepackage{fancyhdr} % Mise en page, en-tête et pied de page
+\usepackage{calc} % Opérations
+\usepackage{marvosym} % Martin Vogels Symbole (\EUR)
+\usepackage{cancel} % draw diagonal lines
+\usepackage{units} % typesetting units and nice fractions
+\usepackage[autolanguage]{numprint} % écrituredes virgules
+\usepackage{tabularx} % creates a paragraph-like column whose width
+% automatically expands
+\usepackage{wrapfig} % allows figures or tables to have text wrapped around
+\usepackage{pst-eucl, pst-plot} % figures géométriques
+\usepackage{enumitem}
+\usepackage{wasysym} % Symbole Euro
+\usepackage{mathtools} % Encadrement dans align*
+\usepackage[inline]{asymptote}
+\usepackage{tkz-tab}
+\usetikzlibrary{external} % set up externalization
+\tikzexternalize[shell escape=-enable-write18] % activate externalisation
+\tikzset{%
+  external/system call={%
+    latex \tikzexternalcheckshellescape -halt-on-error
+    -interaction=batchmode -jobname "\image" "\texsource" &&
+    dvips -o "\image".ps "\image".dvi &&
+    ps2eps -f "\image.ps"
+    }
+  }
+
+%\usepackage{textcomp}
+
+\usepackage[a4paper, dvips, left=1.5cm, right=1.5cm, top=2cm,%
+bottom=2cm, marginpar=5mm, marginparsep=5pt]{geometry}
+\newcounter{exo}
+\frenchbsetup{StandardItemLabels} % remet \textbullet pour les listes
+\setlength{\headheight}{18pt}
+\setlength{\fboxsep}{1em}
+\setlength\parindent{0em}
+\setlength\mathindent{0em}
+\setlength{\columnsep}{30pt}
+\usepackage[bookmarks=true, bookmarksnumbered=true, ps2pdf, pagebackref=true,%
+colorlinks=true,linkcolor=blue,plainpages=true,unicode]{hyperref}
+\hypersetup{pdfauthor={Jérôme Ortais},pdfsubject={Exercices de
+    mathématiques},pdftitle={Exercices créés par Pyromaths, un logiciel libre
+    en Python sous licence GPL}}
+
+\def\pshlabel#1{\psframebox*[fillcolor=White,framearc=.2]{\footnotesize $#1$}}
+\def\psvlabel#1{\psframebox*[fillcolor=White,framearc=.2]{\footnotesize $#1$}}
+
+\makeatletter
+\newcommand\styleexo[1][]{
+  \renewcommand{\theenumi}{\arabic{enumi}}
+  \renewcommand{\labelenumi}{$\blacktriangleright$\textbf{\theenumi.}}
+  \renewcommand{\theenumii}{\alph{enumii}}
+  \renewcommand{\labelenumii}{\textbf{\theenumii)}}
+  {\fontfamily{pag}\fontseries{b}\selectfont \underline{#1 \theexo}}
+  \par\@afterheading\vspace{0.5\baselineskip minus 0.2\baselineskip}}
+\newcommand*\exercice{%
+  \psset{unit=1cm, dash=4pt 4pt, PointName=default,linecolor=Maroon,
+    dotstyle=x, linestyle=solid, hatchcolor=Peru, gridcolor=Olive,
+    subgridcolor=Olive, fillcolor=Peru}
+  %\ifthenelse{\equal{\theexo}{0}}{}{\filbreak}
+  \refstepcounter{exo}%
+  \stepcounter{nocalcul}%
+  \par\addvspace{1.5\baselineskip minus 1\baselineskip}%
+  \@ifstar%
+  {\penalty-130\styleexo[Corrigé de l'exercice]}%
+  {\penalty-130\styleexo[Exercice]}%
+  }
+\makeatother
+\newlength{\ltxt}
+\newcounter{fig}
+\newcommand{\figureadroite}[2]{
+  \setlength{\ltxt}{\linewidth}
+  \setbox\thefig=\hbox{#1}
+  \addtolength{\ltxt}{-\wd\thefig}
+  \addtolength{\ltxt}{-10pt}
+  \begin{minipage}{\ltxt}
+    #2
+  \end{minipage}
+  \hfill
+  \begin{minipage}{\wd\thefig}
+    #1
+  \end{minipage}
+  \refstepcounter{fig}
+  }
+\count1=\year \count2=\year
+\ifnum\month<8\advance\count1by-1\else\advance\count2by1\fi
+\pagestyle{fancy}
+\cfoot{\textsl{\footnotesize{Année \number\count1/\number\count2}}}
+\rfoot{\textsl{\tiny{http://www.pyromaths.org}}}
+\lhead{\textsl{\footnotesize{Page \thepage/ \pageref{LastPage}}}}
+\chead{\Large{\textsc{Révisions}}}
+\rhead{\textsl{\footnotesize{Classe de 5\ieme}}}
+
+\begin{document}
+  \currentpdfbookmark{Les énoncés des exercices}{Énoncés}
+  \newcounter{nocalcul}[exo]
+  \renewcommand{\thenocalcul}{\Alph{nocalcul}}
+  \raggedcolumns
+  \setlength{\columnseprule}{0.5pt}
+
+  \exercice
+  \begin{minipage}{4cm}
+    \begin{pspicture}(-2,-2)(2,2)
+      \pscircle[fillstyle=solid](0,0){1.5}
+      \pscircle[fillstyle=solid, fillcolor=white](0,0){1}
+      \psdots[dotstyle=x](0,0)
+      \rput(0.3;60){$O$}
+    \end{pspicture}
+  \end{minipage}\hfill
+  \begin{minipage}{13cm}
+    On considère deux cercles de centre $O$ et de diamètres respectifs
+    $\unit[76]{cm}$ et $\unit[114]{cm}$.\par
+    Calculer l'aire de la couronne circulaire (partie colorée) comprise entre
+    les deux cercles en arrondissant le résultat au $\unit{cm^2}$ le plus
+    proche.
+  \end{minipage}
+
+
+  \exercice
+  \begin{enumerate}
+  \item Trace un rectangle $KAOI$ tel que $OI=\unit[4]{cm}$ et
+    $\widehat{IOK}=40\degres$.\par
+  \item Trace un parallélogramme $SOXW$ tel que $WS=\unit[4,8]{cm}$,
+    $OW=\unit[6]{cm}$ et $\widehat{SWO}=64\degres$.\par
+  \item Trace un losange $QESK$  tel que $SQ=\unit[5,4]{cm}$ et
+    $KE=\unit[3,6]{cm}$.\par
+  \end{enumerate}
+
+  \exercice
+  \begin{enumerate}
+  \item Trace un triangle $WGU$ isocèle en $U$ tel que $GW=\unit[6]{cm}$, 
+    $\widehat{WGU}=38\degres$.
+  \item Trace un triangle $ION$ rectangle en $O$ tel que $IN=\unit[5,8]{cm}$ et
+    $\widehat{NIO}=30\degres$.\par
+  \item Trace un triangle $BMR$ isocèle en $B$ tel que $MR=\unit[6,4]{cm}$, 
+    $\widehat{MBR}=86\degres$.
+  \item Trace un triangle $LHA$ tel que $HA=\unit[6,6]{cm}$, 
+    $\widehat{AHL}=36\degres$ et $\widehat{HLA}=60\degres$
+  \end{enumerate}
+
+  \exercice
+  Compléter :
+  \begin{multicols}{4}
+    \begin{enumerate}
+    \item $\dfrac{80}{24}=\dfrac{10}{\ldots}$
+    \item $\dfrac{50}{60}=\dfrac{5}{\ldots}$
+    \item $\dfrac{8}{\ldots}=\dfrac{64}{80}$
+    \item $\dfrac{6}{5}=\dfrac{\ldots}{15}$
+    \item $\dfrac{49}{\ldots}=\dfrac{7}{4}$
+    \item $\dfrac{3}{10}=\dfrac{6}{\ldots}$
+    \item $\dfrac{24}{48}=\dfrac{\ldots}{6}$
+    \item $\dfrac{9}{\ldots}=\dfrac{90}{80}$
+    \end{enumerate}
+  \end{multicols}
+
+
+  \exercice
+  Calculer en détaillant les étapes. Donner le résultat sous la forme d’une
+  fraction la plus simple possible (ou d’un entier lorsque c’est possible).
+  \begin{multicols}{4}
+    \begin{enumerate}
+    \item $\thenocalcul = \dfrac{2}{63}\times \dfrac{49}{8}$
+      \stepcounter{nocalcul}
+    \item $\thenocalcul = \dfrac{15}{28}\times \dfrac{4}{9}$
+      \stepcounter{nocalcul}
+    \item $\thenocalcul = \dfrac{80}{27}\times \dfrac{27}{80}$
+      \stepcounter{nocalcul}
+    \item $\thenocalcul = \dfrac{20}{27}\times \dfrac{27}{70}$
+      \stepcounter{nocalcul}
+    \end{enumerate}
+  \end{multicols}
+
+  \exercice
+  Calculer en détaillant les étapes. Donner le résultat sous la forme d’une
+  fraction la plus simple possible (ou d’un entier lorsque c’est possible).
+  \begin{multicols}{4}
+    \begin{enumerate}
+    \item $\thenocalcul = \dfrac{7}{15}+\dfrac{9}{5}$
+      \stepcounter{nocalcul}
+    \item $\thenocalcul = \dfrac{4}{70}-\dfrac{5}{10}$
+      \stepcounter{nocalcul}
+    \item $\thenocalcul = \dfrac{1}{35}+\dfrac{10}{7}$
+      \stepcounter{nocalcul}
+    \item $\thenocalcul = \dfrac{9}{6}-1$
+      \stepcounter{nocalcul}
+    \item $\thenocalcul = \dfrac{10}{10}+8$
+      \stepcounter{nocalcul}
+    \item $\thenocalcul = 6-\dfrac{1}{9}$
+      \stepcounter{nocalcul}
+    \item $\thenocalcul = \dfrac{7}{6}-\dfrac{6}{6}$
+      \stepcounter{nocalcul}
+    \item $\thenocalcul = 1-\dfrac{4}{6}$
+      \stepcounter{nocalcul}
+    \end{enumerate}
+  \end{multicols}
+
+  \exercice
+  Calculer les expressions suivantes en détaillant les calculs.
+
+  \begin{multicols}{3}
+    \noindent
+    \[ \thenocalcul = 6\times (10+8) \]
+    \stepcounter{nocalcul}%
+    \[ \thenocalcul = 13\times (7+6) \]
+    \stepcounter{nocalcul}%
+    \[ \thenocalcul = 5\times (10-3) \]
+    \stepcounter{nocalcul}%
+    \[ \thenocalcul = 8+7+7\div 7-4\times 3 \]
+    \stepcounter{nocalcul}%
+    \[ \thenocalcul = 7-6\div 3+5+2\times 8 \]
+    \stepcounter{nocalcul}%
+    \[ \thenocalcul = 10\div 5+7+3\times (7-6) \]
+    \stepcounter{nocalcul}%
+    \[ \thenocalcul = 8\times 11+12\div 6+8-13 \]
+    \stepcounter{nocalcul}%
+    \[ \thenocalcul = 9{,}1\times 8{,}8+4{,}5+9{,}1-5{,}3 \]
+    \stepcounter{nocalcul}%
+    \[ \thenocalcul = 6{,}6-1{,}2+4{,}8\times (5{,}9+6) \]
+    \stepcounter{nocalcul}%
+  \end{multicols}
+
+  \exercice Sur ce plan, la longueur $b$ mesure en réalité \unit[2,25]{m} :
+
+  \psset{PointName = none,  PointSymbol = none, unit = 1mm, linewidth = .5pt}
+  \definecolor{enonce}{rgb}{0.11,0.56,0.98}
+  \begin{pspicture}(-10mm, -10mm)(50mm ,50mm)
+    \pstGeonode[CurveType = polygon, linewidth = 1pt](0, 0)A(50,0)B (50, 36)C
+    (0, 36)D
+    \pstGeonode(29, 0){E1}(29, 3){E2}(35, 0){F1}(35, 3){F2}
+    \pstGeonode(50, 9){G1}(35, 9){G2}(35, 25){G3}
+    \pstGeonode(29, 9){H1}(29, 25){H2}(29, 18){H3}(15, 18){H4}
+    \pstGeonode(0, 18){K2}(7, 18){K1}
+    \pstGeonode(29, 29){J1}(29, 36){J2}(35, 29){J3}(35, 36){J4}
+    \ncline{-|}{E1}{E2}\ncline{-|}{F1}{F2}
+    \ncline{|-}{J1}{J2}\ncline{|-}{J3}{J4}
+    \ncline{|-}{K1}{K2}
+    \ncline{G1}{G2}\ncline{|-|}{G3}{G2}
+    \ncline{|-|}{H1}{H2}\ncline{-|}{H3}{H4}
+    \ncline[linestyle=dashed, offset = 1.5, linewidth = 0.4pt ]{<->}{D}{C} 
+    \Aput{ a}
+    \ncline[linestyle=dashed, offset = -1.5, linewidth = 0.4pt ,linecolor =
+    enonce]{<->}{B}{G1}  \Bput{\color{enonce} b}
+    \ncline[linestyle=dashed, offset = -1.5, linewidth = 0.4pt ]{<->}{F1}{B} 
+    \Bput{ c}
+    \ncline[linestyle=dashed, offset = 1.5, linewidth = 0.4pt ]{<->}{A}{D} 
+    \Aput{ d}
+  \end{pspicture}
+  \begin{enumerate}
+  \item Déterminer l'échelle de ce plan.
+  \item Déterminer les longueurs réelles $a$, $c$ et $d$.
+  \end{enumerate}
+
+  \exercice
+  Effectuer sans calculatrice :
+  \begin{multicols}{3}\noindent
+    \begin{enumerate}
+    \item $-10 + \ldots\ldots\ldots = -8$
+    \item $6 + 5 = \ldots\ldots\ldots$
+    \item $\ldots\ldots\ldots + \left( -4\right) = -3$
+    \item $\ldots\ldots\ldots + 3 = -5$
+    \item $5 + 1 = \ldots\ldots\ldots$
+    \item $11 - \ldots\ldots\ldots = 3$
+    \item $-5 + 3 = \ldots\ldots\ldots$
+    \item $-12 - \left( -6\right) = \ldots\ldots\ldots$
+    \item $8 + \ldots\ldots\ldots = 0$
+    \item $9 + \left( -1\right) = \ldots\ldots\ldots$
+    \item $\ldots\ldots\ldots - 4 = -6$
+    \item $6 - 8 = \ldots\ldots\ldots$
+    \item $3 - \ldots\ldots\ldots = 4$
+    \item $-2 + \left( -9\right) = \ldots\ldots\ldots$
+    \item $6,4 - 3,9 = \ldots\ldots\ldots$
+    \item $-9,4 - \ldots\ldots\ldots = -0,7$
+    \item $-8,5 - \left( -2,4\right) = \ldots\ldots\ldots$
+    \item $-0,3 + \ldots\ldots\ldots = -9,7$
+    \item $6,3 - \ldots\ldots\ldots = -0,9$
+    \item $\ldots\ldots\ldots - \left( -2,3\right) = -3,4$
+    \end{enumerate}
+  \end{multicols}
+
+  \exercice
+  \parbox{0.4\linewidth}{
+    \begin{enumerate}
+    \item Donner les coordonnées des points A, B, G, H, K et L.
+    \item Placer dans le repère les points O, P, Q, S, T et U de coordonnées
+      respectives \hbox{$(0~;~4)$}, \hbox{$(-1{,}5~;~1{,}5)$},
+      \hbox{$(-3{,}5~;~0)$}, \hbox{$(-3{,}5~;~-2)$}, \hbox{$(2~;~0{,}5)$} et
+      \hbox{$(1{,}5~;~-2{,}5)$}.
+    \item Placer dans le repère le point Z d'abscisse -3 et d'ordonnée -3,5
+    \end{enumerate}}\hfill
+  \parbox{0.55\linewidth}{
+    \psset{unit=0.8cm}
+    \begin{pspicture}(-4.95,-4.95)(4.95,4.95)
+      \psgrid[subgriddiv=2, subgridcolor=lightgray,
+      gridlabels=8pt](0,0)(-5,-5)(5,5)
+      \psline[linewidth=1.2pt]{->}(-5,0)(5,0)
+      \psline[linewidth=1.2pt]{->}(0,-5)(0,5)
+      \pstGeonode[PointSymbol=x,PosAngle={-135,-45,135,-45,135,45,},PointNameSep=0.4](-4.5, -1.5){A}(0, -1.5){B}(-0.5, 0){G}(4.5, -1.0){H}(-4.0, 2.0){K}(3.0, 2.0){L}
+    \end{pspicture}}
+
+  \exercice
+  \renewcommand{\arraystretch}{2}
+  \begin{enumerate}
+    \renewcommand{\arraystretch}{1.8}
+  \item On a demandé aux élèves d'une classe de cinquième combien de temps par
+    semaine était consacré à leur sport favori.\par
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}\hline Durée t (en h)&  $0 \le t < 1$ &
+      $1 \le t  < 2$ & $2 \le t  < 3$ & $3 \le t  < 4$ &  $4 \le t  < 5$ & $5
+      \le t  < 6$ & $6 \le t  < 7$ \\\hline Effectif & 6 & 8 & 8 & 3 & 2 & 2 &
+      1 \\\hline \end{tabular}\par
+      À partir de ce tableau, construire un  histogramme pour représenter ces
+      données.\par
+    \item On a demandé aux élèves quel était leur sport préféré. 4 élèves
+      préfèrent le basket-ball, 9 le tennis, 12 le football et 5 le judo.
+      Construire un diagramme circulaire représentant cette répartion.\par
+    \end{enumerate}
+
+    \exercice
+    Construire la symétrique de chacune des figures par rapport au point O en
+    utilisant le quadrillage :\par
+    \psset{unit=.9cm}
+    \begin{pspicture*}(-3,-3)(3,3)
+      \psgrid[subgriddiv=2,gridlabels=0pt]
+      \pstGeonode[PointSymbol=none,PointName=none](3.0,2.5){a}(-1.0,1.0){b}(-3.0,2.0){c}(-1.5,-3.0){d}(2.5,-0.5){e}
+      \pstGeonode[PointSymbol=x, linecolor=Black, dotsize=6pt](0.0,0.0){O}
+      \pspolygon[linewidth=1pt](a)(b)(c)(d)(e)
+    \end{pspicture*}
+    \hfill
+    \begin{pspicture*}(-3,-3)(3,3)
+      \psgrid[subgriddiv=2,gridlabels=0pt]
+      \pstGeonode[PointSymbol=none,PointName=none](2.5,2.0){a}(0.5,3.0){b}(-1.5,0.0){c}(-1.5,-3.0){d}(2.5,-2.0){e}
+      \pstGeonode[PointSymbol=x, linecolor=Black, dotsize=6pt](0.0,0.0){O}
+      \pspolygon[linewidth=1pt](a)(b)(c)(d)(e)
+    \end{pspicture*}
+    \hfill
+    \begin{pspicture*}(-3,-3)(3,3)
+      \psgrid[subgriddiv=2,gridlabels=0pt]
+      \pstGeonode[PointSymbol=none,PointName=none](0.5,1.5){a}(-2.5,3.0){b}(-3.0,-1.5){c}(-2.0,-3.0){d}(1.5,-3.0){e}
+      \pstGeonode[PointSymbol=x, linecolor=Black, dotsize=6pt](0.0,0.0){O}
+      \pspolygon[linewidth=1pt](a)(b)(c)(d)(e)
+    \end{pspicture*}
+    \label{LastPage}
+    \newpage
+    \currentpdfbookmark{Le corrigé des exercices}{Corrigé}
+    \lhead{\textsl{{\footnotesize Page \thepage/ \pageref{LastCorPage}}}}
+    \setcounter{page}{1} \setcounter{exo}{0}
+
+    \exercice*
+    \begin{minipage}{4cm}
+      \begin{pspicture}(-2,-2)(2,2)
+        \pscircle[fillstyle=solid](0,0){1.5}
+        \pscircle[fillstyle=solid, fillcolor=white](0,0){1}
+        \psdots[dotstyle=x](0,0)
+        \rput(0.3;60){$O$}
+      \end{pspicture}
+    \end{minipage}\hfill
+    \begin{minipage}{13cm}
+      On considère deux cercles de centre $O$ et de diamètres respectifs
+      $\unit[76]{cm}$ et $\unit[114]{cm}$.\par
+      Calculer l'aire de la couronne circulaire (partie colorée) comprise entre
+      les deux cercles en arrondissant le résultat au $\unit{cm^2}$ le plus
+      proche.
+      \par\dotfill{}\\
+
+      Un disque de diamètre $\unit[114]{cm}$ a pour rayon $114 \div 2 =
+      \unit[57]{cm}$. Calculons son aire:
+      \[\pi \times 57^2 = \pi \times 57 \times 57 = \unit[3\,249 \pi]{cm^2}\]
+      Un disque de diamètre $\unit[76]{cm}$ a pour rayon $76 \div 2 =
+      \unit[38]{cm}$. Calculons son aire:
+      \[\pi \times 38^2 = \pi \times 38 \times 38 = \unit[1\,444 \pi]{cm^2}\]
+      L'aire $\mathcal{A}$ de la couronne est obtenue en retranchant l'aire du
+      disque de rayon  $\unit[38]{cm}$  à l'aire du disque de rayon 
+      $\unit[57]{cm}$:
+      \[\mathcal{A} = 3\,249 \pi  - 1\,444 \pi= (3\,249 - 1\,444)\pi
+        =\unit[1\,805 \pi]{cm^2}\]
+      L'aire exacte de la couronne est $\unit[1\,805 \pi]{cm^2}$.
+      En prenant 3,14 comme valeur approchée du nombre $\pi$, on obtient :
+      \[\mathcal{A}  \approx 1\,805 \times 3,14\]
+      \[\boxed{\mathcal{A} \approx  \unit[5\,668]{cm^2}}\]
+    \end{minipage}
+
+
+    \exercice*
+    \begin{enumerate}
+      \definecolor{enonce}{rgb}{0.11,0.56,0.98}
+      \definecolor{calcul}{rgb}{0.13,0.54,0.13}
+      \psset{MarkAngleRadius=0.7,PointSymbol=none,dotscale=2}
+    \item Trace un rectangle $KAOI$ tel que $OI=\unit[4]{cm}$ et
+      $\widehat{IOK}=40\degres$.\par
+      \figureadroite{
+        \begin{pspicture}(-0.4,-1)(4.4,4.35639852471)
+          \pstTriangle(0,0){O}(4.0,0){I}(4.0,3.35639852471){K}
+          \pstGeonode[PosAngle=135](0,3.35639852471){A}
+          \color{enonce}\pstRightAngle[linecolor=enonce]{A}{K}{I}
+          \color{enonce}\pstRightAngle[linecolor=enonce]{I}{O}{A}
+          \color{enonce}\pstRightAngle[linecolor=enonce]{K}{I}{O}
+          \pstLineAB[nodesepB=-1]{O}{A}\pstLineAB[nodesepB=-1]{K}{A}\pstLineAB{O}{I}\pstLineAB[nodesepB=-1]{I}{K}\pstLineAB[nodesepB=-1]{O}{K}
+          \pcline[linestyle=none](0,0)(4.0,0) 
+          \bput{:U}{\color{enonce}\unit[4]{cm}}
+          \color{enonce}\pstMarkAngle[linecolor=enonce]{I}{O}{K}{40\degres}
+        \end{pspicture}}{
+        \begin{enumerate}
+        \item Je trace le segment $[OI]$ mesurant $\unit[4]{cm}$ ;
+        \item puis je trace l'angle droit $\widehat{OIK}$ ;
+        \item la demi-droite $[OK)$ en mesurant $\widehat{IOK}=40\degres$.
+        \item je trace enfin les angles droit en $O$ et en $K$ pour placer le
+          point $A$.
+        \end{enumerate}}
+    \item Trace un parallélogramme $SOXW$ tel que $WS=\unit[4,8]{cm}$,
+      $OW=\unit[6]{cm}$ et $\widehat{SWO}=64\degres$.\par
+      \begin{enumerate}
+      \item Je trace le segment $[WS]$ mesurant $\unit[4,8]{cm}$ ;
+      \item je trace la demi-droite $[WO)$ en mesurant
+        $\widehat{SWO}=64\degres$ ;
+      \item je place le point $O$ en mesurant $WO=\unit[6]{cm}$ ;
+      \item je construis le point $X$ en reportant au compas $OX=SW$ et $WX=SO$.
+      \end{enumerate}
+
+      \begin{pspicture}(-2.5698,-1)(5.2,6.3927642778)
+        \pstGeonode[PosAngle={-135,-45,45,135}](0,0){W}(4.8,0){S}(2.6302,5.3927642778){O}(-2.1698,5.3927642778){X}
+        \pstLineAB{W}{X}\pstLineAB{O}{X}\pstLineAB{W}{S}\pstLineAB{S}{O}\pstLineAB[nodesepB=-1]{W}{O}
+        \pstRotation[RotAngle=7,PointSymbol=none,PointName=none]{W}{O}[C_1]
+        \pstRotation[RotAngle=-7,PointSymbol=none,PointName=none]{W}{O}[C_2]
+        \pstArcOAB[linecolor=calcul]{W}{C_2}{C_1}
+        \pstRotation[RotAngle=7,PointSymbol=none,PointName=none]{W}{X}[D_1]
+        \pstRotation[RotAngle=-7,PointSymbol=none,PointName=none]{W}{X}[D_2]
+        \pstArcOAB[linecolor=calcul]{W}{D_2}{D_1}
+        \pstRotation[RotAngle=7,PointSymbol=none,PointName=none]{O}{X}[D_3]
+        \pstRotation[RotAngle=-7,PointSymbol=none,PointName=none]{O}{X}[D_4]
+        \pstArcOAB[linecolor=calcul]{O}{D_4}{D_3}
+        \pcline[linestyle=none](0,0)(2.6302,5.3927642778) 
+        \aput{:U}{\color{enonce}\unit[6]{cm}}
+        \pcline[linestyle=none](0,0)(4.8,0) 
+        \bput{:U}{\color{enonce}\unit[4,8]{cm}}
+        \color{enonce}\pstMarkAngle[linecolor=enonce]{S}{W}{O}{64\degres}
+        \pstLineAB[linestyle=none]{W}{X}\lput{:U}{\psset{linecolor=calcul}\MarkHashh}
+        \pstLineAB[linestyle=none]{S}{O}\lput{:U}{\psset{linecolor=calcul}\MarkHashh}
+        \pstLineAB[linestyle=none]{W}{S}\lput{:U}{\psset{linecolor=calcul}\MarkHash}
+        \pstLineAB[linestyle=none]{X}{O}\lput{:U}{\psset{linecolor=calcul}\MarkHash}
+      \end{pspicture}
+    \item Trace un losange $QESK$  tel que $SQ=\unit[5,4]{cm}$ et
+      $KE=\unit[3,6]{cm}$.\par
+      Je note $H$ le centre du losange.\par
+      \figureadroite{
+        \begin{pspicture}(-2.5,-3.1)(2.2,3.1)
+          \pstGeonode[PosAngle={-90,0,90,180}](0,-2.7){S}(1.8,0){K}(0,2.7){Q}(-1.8,0){E}
+          \pstGeonode[PosAngle=-45](0,0){H}
+          \pstLineAB{S}{H}\lput{:U}{\psset{linecolor=calcul}\MarkCross}
+          \pstLineAB{Q}{H}\lput{:U}{\psset{linecolor=calcul}\MarkCross}
+          \pstLineAB{K}{H}\lput{:U}{\psset{linecolor=calcul}\MarkCros}
+          \pstLineAB{E}{H}\lput{:U}{\psset{linecolor=calcul}\MarkCros}
+          \pstLineAB{S}{K}\lput{:U}{\psset{linecolor=enonce}\MarkHashh}
+          \pstLineAB{Q}{E}\lput{:U}{\psset{linecolor=enonce}\MarkHashh}
+          \pstLineAB{K}{Q}\lput{:U}{\psset{linecolor=enonce}\MarkHashh}
+          \pstLineAB{E}{S}\lput{:U}{\psset{linecolor=enonce}\MarkHashh}
+          \pstRightAngle[linecolor=calcul]{K}{H}{Q}
+          \pcline[linestyle=none](-1.8,0)(0,0) 
+          \aput{:U}{\color{enonce}\unit[1,8]{cm}}
+          \pcline[linestyle=none](0,-2.7)(0,0) 
+          \aput{:U}{\color{enonce}\unit[2,7]{cm}}
+        \end{pspicture}}{
+        Les diagonales du losange se coupent perpendiculairement en leur
+        milieu~$H$ ;  on a donc :
+        \begin{enumerate}
+        \item $SH=QH=\unit[2,7]{cm}$ \item $KH=HE=\unit[1,8]{cm}$ ;
+        \item $(SQ)\perp(KE)$.
+        \end{enumerate}}
+
+    \end{enumerate}
+
+    \exercice*
+    \begin{enumerate}
+      \definecolor{enonce}{rgb}{0.11,0.56,0.98}
+      \definecolor{calcul}{rgb}{0.13,0.54,0.13}
+      \psset{MarkAngleRadius=0.6,PointSymbol=none}
+    \item Trace un triangle $WGU$ isocèle en $U$ tel que $GW=\unit[6]{cm}$, 
+      $\widehat{WGU}=38\degres$. \par
+      Comme $GWU$ est un triangle isocèle en $U$, je sais que les angles
+      adjacents à la base sont de même mesure donc
+      $\widehat{GWU}=\widehat{WGU}=38\degres$.\par
+      \begin{pspicture}(-1,-1)(7.0,3.34385687952)
+        \pstTriangle(0,0){G}(6.0,0){W}(3.0,2.34385687952){U}
+        \pstLineAB[nodesepB=-1]{G}{U}
+        \pstLineAB[linestyle=none]{G}{U}
+        \lput{:U}{\psset{linecolor=enonce}\MarkHashh}
+        \pstLineAB[nodesepB=-1]{W}{U}
+        \pstLineAB[linestyle=none]{W}{U}\lput{:U}{\psset{linecolor=enonce}\MarkHashh}
+        \pcline[linestyle=none](0,0)(6.0,0) 
+        \bput{:U}{\color{enonce}\unit[6]{cm}}
+        \color{enonce}\pstMarkAngle[linecolor=enonce]{W}{G}{U}{38\degres}
+        \color{calcul}\pstMarkAngle[linecolor=calcul]{U}{W}{G}{38\degres}
+      \end{pspicture}
+    \item Trace un triangle $ION$ rectangle en $O$ tel que $IN=\unit[5,8]{cm}$
+      et $\widehat{NIO}=30\degres$.\par
+      Je sais que dans un triangle rectangle, les deux angles aigus sont
+      complémentaires \\ donc $\widehat{NIO}=90\degres-30\degres=60\degres$.\par
+      \figureadroite{
+        \begin{pspicture}(-0.4,-1)(6.2,3.51147367097)
+          \pstTriangle(0,0){I}(5.8,0){N}(4.35,2.51147367097){O}
+          \color{enonce}\pstRightAngle[linecolor=enonce]{I}{O}{N}
+          \pstLineAB[nodesepB=-1]{I}{O}\pstLineAB[nodesepB=-1]{N}{O}
+          \pcline[linestyle=none](0,0)(5.8,0) 
+          \bput{:U}{\color{enonce}\unit[5,8]{cm}}
+          \color{enonce}\pstMarkAngle[linecolor=enonce]{N}{I}{O}{30\degres}
+          \color{calcul}\pstMarkAngle[linecolor=calcul]{O}{N}{I}{60\degres}
+        \end{pspicture}}{
+        \begin{enumerate}
+        \item Je trace le segment $[IN]$ mesurant $\unit[5,8]{cm}$ ;
+        \item puis la demi-droite $[IO)$ en traçant l'angle~$\widehat{NIO}$ ;
+        \item puis la demi-droite $[NO)$ en traçant l'angle~$\widehat{INO}$ ;
+        \end{enumerate}
+
+        }
+    \item Trace un triangle $BMR$ isocèle en $B$ tel que $MR=\unit[6,4]{cm}$, 
+      $\widehat{MBR}=86\degres$.\par
+      Comme $MRB$ est un triangle isocèle en $B$, je sais que les angles
+      adjacents à la base sont de même mesure donc
+      $\widehat{MRB}=\widehat{RMB}$.\par
+      De plus, je sais que la somme des mesures des trois angles d'un triangle
+      est égale à 180\degres \\ donc
+      $\widehat{RMB}=\widehat{MRB}=(180\degres-86\degres)\div 2=47\degres$. \par
+      \begin{pspicture}(-1,-1)(7.4,4.43157987208)
+        \pstTriangle(0,0){M}(6.4,0){R}(3.2,3.43157987208){B}
+        \pstLineAB[nodesepB=-1]{M}{B}
+        \pstLineAB[linestyle=none]{M}{B}
+        \lput{:U}{\psset{linecolor=enonce}\MarkHashh}
+        \pstLineAB[nodesepB=-1]{R}{B}
+        \pstLineAB[linestyle=none]{R}{B}
+        \lput{:U}{\psset{linecolor=enonce}\MarkHashh}
+        \pcline[linestyle=none](0,0)(6.4,0) 
+        \bput{:U}{\color{enonce}\unit[6,4]{cm}}
+        \color{enonce}\pstMarkAngle[linecolor=enonce,Mark=MarkHash]{M}{B}{R}{86\degres}
+        \color{calcul}\pstMarkAngle[linecolor=calcul]{R}{M}{B}{47\degres}
+        \pstMarkAngle[linecolor=calcul]{B}{R}{M}{47\degres}
+      \end{pspicture}
+    \item Trace un triangle $LHA$ tel que $HA=\unit[6,6]{cm}$, 
+      $\widehat{AHL}=36\degres$ et $\widehat{HLA}=60\degres$\par
+      On doit d'abord calculer la mesure de $\widehat{HAL}$.\\
+      Or la somme des trois angles d'un triangle est égale à 180\degres donc
+      $\widehat{HAL}=180\degres-36\degres-60\degres=84\degres$.\par
+      \begin{pspicture}(-1,-1)(7.6,5.45498594397)
+        \pstTriangle(0,0){H}(6.6,0){A}(6.13176210924,4.45498594397){L}
+        \pstLineAB[nodesepB=-1]{H}{L}\pstLineAB[nodesepB=-1]{A}{L}
+        \pstMarkAngle[linecolor=calcul]{L}{A}{H}{\color{calcul}84\degres}
+        \color{enonce}\pstMarkAngle[linecolor=enonce]{H}{L}{A}{60\degres}
+        \pcline[linestyle=none](0,0)(6.6,0) 
+        \bput{:U}{\color{enonce}\unit[6,6]{cm}}
+        \pstMarkAngle[linecolor=enonce]{A}{H}{L}{36\degres}
+      \end{pspicture}
+    \end{enumerate}
+
+    \exercice*
+    Compléter :
+    \begin{multicols}{4}
+      \begin{enumerate}
+      \item $\dfrac{80}{24}=\dfrac{10_{(\times 8)}}{\mathbf{3}_{(\times 8)}}$
+      \item $\dfrac{50}{60}=\dfrac{5_{(\times 10)}}{\mathbf{6}_{(\times 10)}}$
+      \item $\dfrac{8_{(\times 8)}}{\mathbf{10}_{(\times 8)}}=\dfrac{64}{80}$
+      \item $\dfrac{6_{(\times 3)}}{5_{(\times 3)}}=\dfrac{\mathbf{18}}{15}$
+      \item $\dfrac{49}{\mathbf{28}}=\dfrac{7_{(\times 7)}}{4_{(\times 7)}}$
+      \item $\dfrac{3_{(\times 2)}}{10_{(\times 2)}}=\dfrac{6}{\mathbf{20}}$
+      \item $\dfrac{24}{48}=\dfrac{\mathbf{3}_{(\times 8)}}{6_{(\times 8)}}$
+      \item $\dfrac{9_{(\times 10)}}{\mathbf{8}_{(\times 10)}}=\dfrac{90}{80}$
+      \end{enumerate}
+    \end{multicols}
+
+
+    \exercice*
+    Calculer en détaillant les étapes. Donner le résultat sous la forme d’une
+    fraction la plus simple possible (ou d’un entier lorsque c’est possible).
+    \begin{multicols}{4}
+      \begin{enumerate}
+      \item $\thenocalcul = \dfrac{2}{63}\times \dfrac{49}{8}$
+        \[\thenocalcul = \dfrac{\cancel{2}\times \cancel{7}\times
+            7}{\cancel{7}\times 9\times \cancel{2}\times 4}\]
+        \[\thenocalcul = \dfrac{7}{36}\]
+        \stepcounter{nocalcul}
+      \item $\thenocalcul = \dfrac{15}{28}\times \dfrac{4}{9}$
+        \[\thenocalcul = \dfrac{\cancel{3}\times 5\times
+            \cancel{4}}{\cancel{4}\times 7\times \cancel{3}\times 3}\]
+        \[\thenocalcul = \dfrac{5}{21}\]
+        \stepcounter{nocalcul}
+      \item $\thenocalcul = \dfrac{80}{27}\times \dfrac{27}{80}$
+        \[\thenocalcul = \dfrac{\cancel{80}\times \cancel{27}\times
+            \cancel{1}}{\cancel{27}\times \cancel{80}\times \cancel{1}}\]
+        \[\thenocalcul = 1\]
+        \stepcounter{nocalcul}
+      \item $\thenocalcul = \dfrac{20}{27}\times \dfrac{27}{70}$
+        \[\thenocalcul = \dfrac{\cancel{10}\times 2\times
+            \cancel{27}}{\cancel{27}\times \cancel{10}\times 7}\]
+        \[\thenocalcul = \dfrac{2}{7}\]
+        \stepcounter{nocalcul}
+      \end{enumerate}
+    \end{multicols}
+
+    \exercice*
+    Calculer en détaillant les étapes. Donner le résultat sous la forme d’une
+    fraction la plus simple possible (ou d’un entier lorsque c’est possible).
+    \begin{multicols}{4}
+      \begin{enumerate}
+      \item $\thenocalcul = \dfrac{7}{15}+\dfrac{9}{5}$
+        \[\thenocalcul = \dfrac{7}{15}+\dfrac{9_{\times 3}}{5_{\times 3}}\]
+        \[\thenocalcul = \dfrac{7}{15}+\dfrac{27}{15}\]
+        \[\thenocalcul = \dfrac{34}{15}\]
+        \stepcounter{nocalcul}
+      \item $\thenocalcul = \dfrac{4}{70}-\dfrac{5}{10}$
+        \[\thenocalcul = \dfrac{4}{70}-\dfrac{5_{\times 7}}{10_{\times 7}}\]
+        \[\thenocalcul = \dfrac{4}{70}-\dfrac{35}{70}\]
+        \[\thenocalcul = \dfrac{-31}{70}\]
+        \stepcounter{nocalcul}
+      \item $\thenocalcul = \dfrac{1}{35}+\dfrac{10}{7}$
+        \[\thenocalcul = \dfrac{1}{35}+\dfrac{10_{\times 5}}{7_{\times 5}}\]
+        \[\thenocalcul = \dfrac{1}{35}+\dfrac{50}{35}\]
+        \[\thenocalcul = \dfrac{51}{35}\]
+        \stepcounter{nocalcul}
+      \item $\thenocalcul = \dfrac{9}{6}-1$
+        \[\thenocalcul = \dfrac{9}{6}-\dfrac{1_{\times 6}}{1_{\times 6}}\]
+        \[\thenocalcul = \dfrac{9}{6}-\dfrac{6}{6}\]
+        \[\thenocalcul = \dfrac{3}{6}\]
+        \[\thenocalcul = \dfrac{1\times \cancel{3}}{2\times \cancel{3}}\]
+        \[\thenocalcul = \dfrac{1}{2}\]
+        \stepcounter{nocalcul}
+      \item $\thenocalcul = \dfrac{10}{10}+8$
+        \[\thenocalcul = \dfrac{10}{10}+\dfrac{8_{\times 10}}{1_{\times 10}}\]
+        \[\thenocalcul = \dfrac{10}{10}+\dfrac{80}{10}\]
+        \[\thenocalcul = \dfrac{90}{10}\]
+        \[\thenocalcul = \dfrac{9\times \cancel{10}}{1\times \cancel{10}}\]
+        \[\thenocalcul = 9\]
+        \stepcounter{nocalcul}
+      \item $\thenocalcul = 6-\dfrac{1}{9}$
+        \[\thenocalcul = \dfrac{6_{\times 9}}{1_{\times 9}}-\dfrac{1}{9}\]
+        \[\thenocalcul = \dfrac{54}{9}-\dfrac{1}{9}\]
+        \[\thenocalcul = \dfrac{53}{9}\]
+        \stepcounter{nocalcul}
+      \item $\thenocalcul = \dfrac{7}{6}-\dfrac{6}{6}$
+        \[\thenocalcul = \dfrac{1}{6}\]
+        \stepcounter{nocalcul}
+      \item $\thenocalcul = 1-\dfrac{4}{6}$
+        \[\thenocalcul = \dfrac{1_{\times 6}}{1_{\times 6}}-\dfrac{4}{6}\]
+        \[\thenocalcul = \dfrac{6}{6}-\dfrac{4}{6}\]
+        \[\thenocalcul = \dfrac{2}{6}\]
+        \[\thenocalcul = \dfrac{1\times \cancel{2}}{3\times \cancel{2}}\]
+        \[\thenocalcul = \dfrac{1}{3}\]
+        \stepcounter{nocalcul}
+      \end{enumerate}
+    \end{multicols}
+
+    \exercice*
+    Calculer les expressions suivantes en détaillant les calculs.
+    \begin{multicols}{3}
+      \noindent
+      \[ \thenocalcul = 6\times (10+8) \]
+      \[ \thenocalcul = 6\times 18 \]
+      \[ \boxed{\thenocalcul = 108} \]
+      \stepcounter{nocalcul}%
+      \[ \thenocalcul = 13\times (7+6) \]
+      \[ \thenocalcul = 13\times 13 \]
+      \[ \boxed{\thenocalcul = 169} \]
+      \stepcounter{nocalcul}%
+      \[ \thenocalcul = 5\times (10-3) \]
+      \[ \thenocalcul = 5\times 7 \]
+      \[ \boxed{\thenocalcul = 35} \]
+      \stepcounter{nocalcul}%
+      \[ \thenocalcul = 8+7+7\div 7-4\times 3 \]
+      \[ \thenocalcul = 8+7+1-4\times 3 \]
+      \[ \thenocalcul = 8+7+1-12 \]
+      \[ \thenocalcul = 15+1-12 \]
+      \[ \thenocalcul = 16-12 \]
+      \[ \boxed{\thenocalcul = 4} \]
+      \stepcounter{nocalcul}%
+      \[ \thenocalcul = 7-6\div 3+5+2\times 8 \]
+      \[ \thenocalcul = 7-2+5+2\times 8 \]
+      \[ \thenocalcul = 7-2+5+16 \]
+      \[ \thenocalcul = 5+5+16 \]
+      \[ \thenocalcul = 10+16 \]
+      \[ \boxed{\thenocalcul = 26} \]
+      \stepcounter{nocalcul}%
+      \[ \thenocalcul = 10\div 5+7+3\times (7-6) \]
+      \[ \thenocalcul = 10\div 5+7+3\times 1 \]
+      \[ \thenocalcul = 2+7+3\times 1 \]
+      \[ \thenocalcul = 2+7+3 \]
+      \[ \thenocalcul = 9+3 \]
+      \[ \boxed{\thenocalcul = 12} \]
+      \stepcounter{nocalcul}%
+      \[ \thenocalcul = 8\times 11+12\div 6+8-13 \]
+      \[ \thenocalcul = 88+12\div 6+8-13 \]
+      \[ \thenocalcul = 88+2+8-13 \]
+      \[ \thenocalcul = 90+8-13 \]
+      \[ \thenocalcul = 98-13 \]
+      \[ \boxed{\thenocalcul = 85} \]
+      \stepcounter{nocalcul}%
+      \[ \thenocalcul = 9{,}1\times 8{,}8+4{,}5+9{,}1-5{,}3 \]
+      \[ \thenocalcul = 80{,}08+4{,}5+9{,}1-5{,}3 \]
+      \[ \thenocalcul = 84{,}58+9{,}1-5{,}3 \]
+      \[ \thenocalcul = 93{,}68-5{,}3 \]
+      \[ \boxed{\thenocalcul = 88{,}38} \]
+      \stepcounter{nocalcul}%
+      \[ \thenocalcul = 6{,}6-1{,}2+4{,}8\times (5{,}9+6) \]
+      \[ \thenocalcul = 6{,}6-1{,}2+4{,}8\times 11{,}9 \]
+      \[ \thenocalcul = 6{,}6-1{,}2+57{,}12 \]
+      \[ \thenocalcul = 5{,}4+57{,}12 \]
+      \[ \boxed{\thenocalcul = 62{,}52} \]
+      \stepcounter{nocalcul}%
+    \end{multicols}
+
+    \exercice* Sur ce plan, la longueur $b$ mesure en réalité \unit[2,25]{m} :
+
+    \psset{PointName = none,  PointSymbol = none, unit = 1mm, linewidth = .5pt}
+    \definecolor{enonce}{rgb}{0.11,0.56,0.98}
+    \begin{pspicture}(-10mm, -10mm)(50mm ,50mm)
+      \pstGeonode[CurveType = polygon, linewidth = 1pt](0, 0)A(50,0)B (50, 36)C
+      (0, 36)D
+      \pstGeonode(29, 0){E1}(29, 3){E2}(35, 0){F1}(35, 3){F2}
+      \pstGeonode(50, 9){G1}(35, 9){G2}(35, 25){G3}
+      \pstGeonode(29, 9){H1}(29, 25){H2}(29, 18){H3}(15, 18){H4}
+      \pstGeonode(0, 18){K2}(7, 18){K1}
+      \pstGeonode(29, 29){J1}(29, 36){J2}(35, 29){J3}(35, 36){J4}
+      \ncline{-|}{E1}{E2}\ncline{-|}{F1}{F2}
+      \ncline{|-}{J1}{J2}\ncline{|-}{J3}{J4}
+      \ncline{|-}{K1}{K2}
+      \ncline{G1}{G2}\ncline{|-|}{G3}{G2}
+      \ncline{|-|}{H1}{H2}\ncline{-|}{H3}{H4}
+      \ncline[linestyle=dashed, offset = 1.5, linewidth = 0.4pt ]{<->}{D}{C} 
+      \Aput{ a}
+      \ncline[linestyle=dashed, offset = -1.5, linewidth = 0.4pt ,linecolor =
+      enonce]{<->}{B}{G1}  \Bput{\color{enonce} b}
+      \ncline[linestyle=dashed, offset = -1.5, linewidth = 0.4pt ]{<->}{F1}{B} 
+      \Bput{ c}
+      \ncline[linestyle=dashed, offset = 1.5, linewidth = 0.4pt ]{<->}{A}{D} 
+      \Aput{ d}
+    \end{pspicture}
+    \begin{enumerate}
+    \item Déterminer l'échelle de ce plan.\par
+      Sur le plan, je mesure que $b=\unit[0,9]{cm}$.\par
+      Or on sait que en réalité $b = \unit[2,25]{m} = \unit[225]{cm}$
+      et  $2\,250 \div 9 = 250$.\par
+      L'échelle de ce plan est donc $1/250^e$.
+    \item Déterminer les longueurs réelles $a$, $c$ et $d$.
+
+      Grâce à la question précédente, je peux compléter le tableau :
+
+      \begin{tabular}{|l|c|c|c|c|c}
+        \multicolumn{1}{c}{}&\multicolumn{1}{c}{$a$}&\multicolumn{1}{c}{$b$}&\multicolumn{1}{c}{$c$}&\multicolumn{1}{c}{$d$}\\
+        \cline{1-5}
+        Sur le plan (en cm)  & 5 & 0,9 & 1,5 & 3,6 &\rnode{plan1}{}\\
+        \cline{1-5}
+        En réalité (en cm)  & \bf1\,250 & 225 & \bf375 & \bf900
+        &\rnode{plan2}{}\\
+        \cline{1-5}
+      \end{tabular}
+
+      \ncbar{->}{plan1}{plan2}\Aput{$\times 250$}
+      Pour conclure, on convertit ses longueurs en m :\par
+      $$a = \unit[12,5]{m} \quad ; \quad b = \unit[2,25]{m} \quad ; \quad c  =
+      \unit[3,75]{m} \quad ; \quad d =\unit[9]{m}$$
+    \end{enumerate}
+
+    \exercice*
+    Effectuer sans calculatrice :
+    \begin{multicols}{3}\noindent
+      \begin{enumerate}
+      \item $-10 + \mathbf{2} = -8$
+      \item $6 + 5 = \mathbf{11}$
+      \item $\mathbf{1} + \left( -4\right) = -3$
+      \item $\mathbf{-8} + 3 = -5$
+      \item $5 + 1 = \mathbf{6}$
+      \item $11 - \mathbf{8} = 3$
+      \item $-5 + 3 = \mathbf{-2}$
+      \item $-12 - \left( -6\right) = \mathbf{-6}$
+      \item $8 + \mathbf{\left( -8\right)} = 0$
+      \item $9 + \left( -1\right) = \mathbf{8}$
+      \item $\mathbf{-2} - 4 = -6$
+      \item $6 - 8 = \mathbf{-2}$
+      \item $3 - \mathbf{\left( -1\right)} = 4$
+      \item $-2 + \left( -9\right) = \mathbf{-11}$
+      \item $6,4 - 3,9 = \mathbf{2,5}$
+      \item $-9,4 - \mathbf{\left( -8,7\right)} = -0,7$
+      \item $-8,5 - \left( -2,4\right) = \mathbf{-6,1}$
+      \item $-0,3 + \mathbf{\left( -9,4\right)} = -9,7$
+      \item $6,3 - \mathbf{7,2} = -0,9$
+      \item $\mathbf{-5,7} - \left( -2,3\right) = -3,4$
+      \end{enumerate}
+    \end{multicols}
+
+    \exercice*
+    \parbox{0.4\linewidth}{
+      \psset{unit=0.8cm}
+      \begin{pspicture}(-5,-5)(5,5)
+        \psgrid[subgriddiv=2, subgridcolor=lightgray,
+        gridlabels=8pt](0,0)(-5,-5)(5,5)
+        \psline[linewidth=1.2pt]{->}(-5,0)(5,0)
+        \psline[linewidth=1.2pt]{->}(0,-5)(0,5)
+        \pstGeonode[PointSymbol=x,PosAngle={-135,-45,135,-45,135,45,45,135,135,-135,45,-45,-135,},PointNameSep=0.4](-4.5, -1.5){A}(0, -1.5){B}(-0.5, 0){G}(4.5, -1.0){H}(-4.0, 2.0){K}(3.0, 2.0){L}(0, 4.0){O}(-1.5, 1.5){P}(-3.5, 0){Q}(-3.5, -2.0){S}(2.0, 0.5){T}(1.5, -2.5){U}(-3.0, -3.5){Z}
+      \end{pspicture}}\hfill
+    \parbox{0.5\linewidth}{
+      \begin{enumerate}
+      \item Donner les coordonnées des points A, B, G, H, K et L.
+        Les coordonnées du point A sont \hbox{$(-4{,}5~;~-1{,}5)$}
+
+        Les coordonnées du point B sont \hbox{$(0~;~-1{,}5)$}
+
+        Les coordonnées du point G sont \hbox{$(-0{,}5~;~0)$}
+
+        Les coordonnées du point H sont \hbox{$(4{,}5~;~-1)$}
+
+        Les coordonnées du point K sont \hbox{$(-4~;~2)$}
+
+        Les coordonnées du point L sont \hbox{$(3~;~2)$}
+
+      \item Placer dans le repère les points O, P, Q, S, T et U de coordonnées
+        respectives \hbox{$(0~;~4)$}, \hbox{$(-1{,}5~;~1{,}5)$},
+        \hbox{$(-3{,}5~;~0)$}, \hbox{$(-3{,}5~;~-2)$}, \hbox{$(2~;~0{,}5)$} et
+        \hbox{$(1{,}5~;~-2{,}5)$}.
+      \item Placer dans le repère le point Z d'abscisse -3 et d'ordonnée -3,5
+      \end{enumerate}
+      }
+
+    \exercice*
+    \renewcommand{\arraystretch}{2}
+    \begin{enumerate}
+      \renewcommand{\arraystretch}{1.8}
+    \item On a demandé aux élèves d'une classe de cinquième combien de temps
+      par semaine était consacré à leur sport favori.\par
+      \begin{tabular}{|c|c|c|c|c|c|c|c|}\hline Durée t (en h)&  $0 \le t < 1$ &
+        $1 \le t  < 2$ & $2 \le t  < 3$ & $3 \le t  < 4$ &  $4 \le t  < 5$ & $5
+        \le t  < 6$ & $6 \le t  < 7$ \\\hline Effectif & 6 & 8 & 8 & 3 & 2 & 2
+        & 1 \\\hline \end{tabular}\par
+        À partir de ce tableau, construire un  histogramme pour représenter ces
+        données.\par
+        \begin{minipage}{10cm}
+          \begin{pspicture}(0,-1)(8.5,9.5)
+            \psaxes[showorigin=false]{->}(7.5,8.5)
+            \psset{fillstyle=solid, linewidth=0.5pt}
+            \psframe(0,0)(1,6)
+            \psframe(1,0)(2,8)
+            \psframe(2,0)(3,8)
+            \psframe(3,0)(4,3)
+            \psframe(4,0)(5,2)
+            \psframe(5,0)(6,2)
+            \psframe(6,0)(7,1)
+            \rput(-0.2,-0.425){$0$}
+            \rput(8.3,0){Durée}
+            \rput(0,8.8){Effectif}
+          \end{pspicture}
+        \end{minipage}
+        \begin{minipage}{6cm}
+          Sur l'axe horizontal, on représente les durées en heures et, sur
+          l'axe vertical, on représente les effectifs.
+        \end{minipage}
+      \item On a demandé aux élèves quel était leur sport préféré. 4 élèves
+        préfèrent le basket-ball, 9 le tennis, 12 le football et 5 le judo.
+        Construire un diagramme circulaire représentant cette répartion.\par
+        L'effectif total est égal à $ 4 + 9 + 12 + 5 = 30$. La mesure d'angle
+        d'un secteur circulaire est proportionnelle à l'effectif du sport qu'il
+        représente. Le coefficient de proportionnalité est égal au quotient de
+        l'effectif total par 360\degre c'est à dire $360 \div 30=12$.\par
+        \renewcommand\tabcolsep{10pt}
+        \begin{tabular}{|l|c|c|c|c|c|c}
+          \cline{1-6}
+          Sport favori  & Basket-ball & Tennis & Football & Judo & Total
+          &\rnode{plan1}{}\\
+          \cline{1-6}
+          Effectif & 4 & 9 & 12 & 5 & 30 &\rnode{plan1}{}\\
+          \cline{1-6}
+          Mesure (en degré)  & \bf48 & \bf108 & \bf144 & \bf60 & 360
+          &\rnode{plan2}{}\\
+          \cline{1-6}
+        \end{tabular}
+        \ncbar{->}{plan1}{plan2}\Aput{$\times 12$}\par
+        \begin{minipage}{6cm}
+          En utilisant les mesures d'angles obtenues dans le tableau de
+          proportionnalité, on trace le diagramme circulaire.
+        \end{minipage}
+        \begin{minipage}{13cm}
+          \psset{unit=3cm,fillstyle=solid}
+          \pspicture(-1.5,-1)(1,1.5)
+          \pswedge[fillcolor=Bisque]{1}{0}{48}
+          \pswedge[fillcolor=LightSalmon]{1}{48}{156}
+          \pswedge[fillcolor=Chocolate]{1}{156}{300}
+          \pswedge{1}{300}{360}
+          \rput(.6;24){Basket}
+          \rput(.6;102){Tennis}
+          \rput(.6;228){\white Football}
+          \rput(.6;330){Judo}
+          \endpspicture
+        \end{minipage}
+      \end{enumerate}
+
+      \exercice*
+      Construire la symétrique de chacune des figures par rapport au point O en
+      utilisant le quadrillage :\par
+      \psset{unit=.9cm}
+      \begin{pspicture*}(-3,-3)(3,3)
+        \psgrid[subgriddiv=2,gridlabels=0pt]
+        \pstGeonode[PointSymbol=none,PointName=none](3.0,2.5){a}(-1.0,1.0){b}(-3.0,2.0){c}(-1.5,-3.0){d}(2.5,-0.5){e}
+        \pstGeonode[PointSymbol=x, linecolor=Black, dotsize=6pt](0.0,0.0){O}
+        \pspolygon[linewidth=1pt](a)(b)(c)(d)(e)
+        \pstSymO[PointSymbol=x,PointName=none]{O}{a,b,c,d,e}[a1,b1,c1,d1,e1]
+        \pspolygon[linecolor=Black,linestyle=dashed,
+        linewidth=1pt](a1)(b1)(c1)(d1)(e1)
+      \end{pspicture*}
+      \hfill
+      \begin{pspicture*}(-3,-3)(3,3)
+        \psgrid[subgriddiv=2,gridlabels=0pt]
+        \pstGeonode[PointSymbol=none,PointName=none](2.5,2.0){a}(0.5,3.0){b}(-1.5,0.0){c}(-1.5,-3.0){d}(2.5,-2.0){e}
+        \pstGeonode[PointSymbol=x, linecolor=Black, dotsize=6pt](0.0,0.0){O}
+        \pspolygon[linewidth=1pt](a)(b)(c)(d)(e)
+        \pstSymO[PointSymbol=x,PointName=none]{O}{a,b,c,d,e}[a1,b1,c1,d1,e1]
+        \pspolygon[linecolor=Black,linestyle=dashed,
+        linewidth=1pt](a1)(b1)(c1)(d1)(e1)
+      \end{pspicture*}
+      \hfill
+      \begin{pspicture*}(-3,-3)(3,3)
+        \psgrid[subgriddiv=2,gridlabels=0pt]
+        \pstGeonode[PointSymbol=none,PointName=none](0.5,1.5){a}(-2.5,3.0){b}(-3.0,-1.5){c}(-2.0,-3.0){d}(1.5,-3.0){e}
+        \pstGeonode[PointSymbol=x, linecolor=Black, dotsize=6pt](0.0,0.0){O}
+        \pspolygon[linewidth=1pt](a)(b)(c)(d)(e)
+        \pstSymO[PointSymbol=x,PointName=none]{O}{a,b,c,d,e}[a1,b1,c1,d1,e1]
+        \pspolygon[linecolor=Black,linestyle=dashed,
+        linewidth=1pt](a1)(b1)(c1)(d1)(e1)
+      \end{pspicture*}
+      \label{LastCorPage}
+    \end{document}

@@ -1,0 +1,1073 @@
+%%!TEX TS-program = latex
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc} % UTF-8
+\usepackage[T1]{fontenc}
+\usepackage{lmodern} % Prévient un bug d'affichage evince lié à [T1]{fontenc}
+\usepackage[frenchb]{babel} % francisation
+\usepackage{adjustbox}
+\usepackage[fleqn]{amsmath} % aligne le mode maths à gauche
+\usepackage{amssymb} % the amsfont symbols
+\usepackage[table, usenames, svgnames]{xcolor} % Couleurs
+\usepackage{multicol} % Multi-colonnes
+\usepackage{fancyhdr} % Mise en page, en-tête et pied de page
+\usepackage{calc} % Opérations
+\usepackage{marvosym} % Martin Vogels Symbole (\EUR)
+\usepackage{cancel} % draw diagonal lines
+\usepackage{units} % typesetting units and nice fractions
+\usepackage[autolanguage]{numprint} % écrituredes virgules
+\usepackage{tabularx} % creates a paragraph-like column whose width
+% automatically expands
+\usepackage{wrapfig} % allows figures or tables to have text wrapped around
+\usepackage{pst-eucl, pst-plot} % figures géométriques
+\usepackage{enumitem}
+\usepackage{wasysym} % Symbole Euro
+\usepackage{mathtools} % Encadrement dans align*
+\usepackage[inline]{asymptote}
+\usepackage{tkz-tab}
+\usetikzlibrary{external} % set up externalization
+\tikzexternalize[shell escape=-enable-write18] % activate externalisation
+\tikzset{%
+  external/system call={%
+    latex \tikzexternalcheckshellescape -halt-on-error
+    -interaction=batchmode -jobname "\image" "\texsource" &&
+    dvips -o "\image".ps "\image".dvi &&
+    ps2eps -f "\image.ps"
+    }
+  }
+
+%\usepackage{textcomp}
+
+\usepackage[a4paper, dvips, left=1.5cm, right=1.5cm, top=2cm,%
+bottom=2cm, marginpar=5mm, marginparsep=5pt]{geometry}
+\newcounter{exo}
+\frenchbsetup{StandardItemLabels} % remet \textbullet pour les listes
+\setlength{\headheight}{18pt}
+\setlength{\fboxsep}{1em}
+\setlength\parindent{0em}
+\setlength\mathindent{0em}
+\setlength{\columnsep}{30pt}
+\usepackage[bookmarks=true, bookmarksnumbered=true, ps2pdf, pagebackref=true,%
+colorlinks=true,linkcolor=blue,plainpages=true,unicode]{hyperref}
+\hypersetup{pdfauthor={Jérôme Ortais},pdfsubject={Exercices de
+    mathématiques},pdftitle={Exercices créés par Pyromaths, un logiciel libre
+    en Python sous licence GPL}}
+
+\def\pshlabel#1{\psframebox*[fillcolor=White,framearc=.2]{\footnotesize $#1$}}
+\def\psvlabel#1{\psframebox*[fillcolor=White,framearc=.2]{\footnotesize $#1$}}
+
+\makeatletter
+\newcommand\styleexo[1][]{
+  \renewcommand{\theenumi}{\arabic{enumi}}
+  \renewcommand{\labelenumi}{$\blacktriangleright$\textbf{\theenumi.}}
+  \renewcommand{\theenumii}{\alph{enumii}}
+  \renewcommand{\labelenumii}{\textbf{\theenumii)}}
+  {\fontfamily{pag}\fontseries{b}\selectfont \underline{#1 \theexo}}
+  \par\@afterheading\vspace{0.5\baselineskip minus 0.2\baselineskip}}
+\newcommand*\exercice{%
+  \psset{unit=1cm, dash=4pt 4pt, PointName=default,linecolor=Maroon,
+    dotstyle=x, linestyle=solid, hatchcolor=Peru, gridcolor=Olive,
+    subgridcolor=Olive, fillcolor=Peru}
+  %\ifthenelse{\equal{\theexo}{0}}{}{\filbreak}
+  \refstepcounter{exo}%
+  \stepcounter{nocalcul}%
+  \par\addvspace{1.5\baselineskip minus 1\baselineskip}%
+  \@ifstar%
+  {\penalty-130\styleexo[Corrigé de l'exercice]}%
+  {\penalty-130\styleexo[Exercice]}%
+  }
+\makeatother
+\newlength{\ltxt}
+\newcounter{fig}
+\newcommand{\figureadroite}[2]{
+  \setlength{\ltxt}{\linewidth}
+  \setbox\thefig=\hbox{#1}
+  \addtolength{\ltxt}{-\wd\thefig}
+  \addtolength{\ltxt}{-10pt}
+  \begin{minipage}{\ltxt}
+    #2
+  \end{minipage}
+  \hfill
+  \begin{minipage}{\wd\thefig}
+    #1
+  \end{minipage}
+  \refstepcounter{fig}
+  }
+\count1=\year \count2=\year
+\ifnum\month<8\advance\count1by-1\else\advance\count2by1\fi
+\pagestyle{fancy}
+\cfoot{\textsl{\footnotesize{Année \number\count1/\number\count2}}}
+\rfoot{\textsl{\tiny{http://www.pyromaths.org}}}
+\lhead{\textsl{\footnotesize{Page \thepage/ \pageref{LastPage}}}}
+\chead{\Large{\textsc{Révisions}}}
+\rhead{\textsl{\footnotesize{Classe de 3\ieme}}}
+
+\begin{document}
+  \currentpdfbookmark{Les énoncés des exercices}{Énoncés}
+  \newcounter{nocalcul}[exo]
+  \renewcommand{\thenocalcul}{\Alph{nocalcul}}
+  \raggedcolumns
+  \setlength{\columnseprule}{0.5pt}
+
+  \exercice
+  \parbox{0.5\linewidth}{
+    ($d_1$) est la droite représentative de la fonction $f$.
+    \begin{enumerate}
+    \item Donner  l'image de $3$ par la fonction \textit{f}.
+    \item Donner  un antécédent de $0,5$ par la fonction \textit{f}.
+    \item Tracer la droite représentative ($d_2$) de la fonction
+      $g:x\longmapsto -x-1$.
+    \item Déterminer l'expression de la fonction $h$ représentée ci-contre par
+      la droite ($d_3$).
+    \end{enumerate}}\hfill
+  \parbox{0.45\linewidth}{
+    \psset{unit=0.8cm}
+    \begin{pspicture}(-5, -5)(5, 5)
+      \psgrid[subgriddiv=2, gridlabels=8pt](0,0)(-5, -5)(5, 5)
+      \psline[linewidth=1.2pt]{->}(-5, 0)(5, 0)
+      \psline[linewidth=1.2pt]{->}(0, -5)(0, 5)
+      \psline (-5, 0.2142857142857144)(5, 3.071428571428571)
+      \rput(-5.5, 0.7142857142857144){($d_1$)}
+      \psline (-4.5, -5)(0.5, 5)
+      \rput(-5.0, -5.5){($d_3$)}
+    \end{pspicture}}
+
+  \exercice
+  \begin{enumerate}
+  \item Donner la décomposition en facteurs premiers des nombres suivants, et
+    préciser quand il s'agit d'un nombre premier :\par
+    262 ; 867 ; 1\,152 ; 139 ; 1\,512 ;
+  \item En déduire le PGCD et le PPCM des nombres 1\,512 et 1\,152.
+  \item Quel est le plus petit nombre par lequel il faut multiplier 262 pour
+    obtenir un carré parfait ?
+  \item Rendre la fraction $\dfrac{1\,512}{1\,152}$ irréductible.
+  \item Calculer $\dfrac{27}{1\,512} + \dfrac{10}{1\,152}$.
+  \end{enumerate}
+
+  \exercice
+  Développer chacune des expressions littérales suivantes :
+  \begin{multicols}{2}
+    $A=\left( 10\,x-5\right) \times \left( 5\,x+10\right) $\\
+    $B=\left( 7\,x+6\right) \times \left( 7\,x-6\right) $\\
+    $C=\left( 8\,x+5\right) ^{2}$\\
+    $D=\left( 4\,x-6\right) ^{2}$\\
+    $E=\left( \dfrac{4}{7}\,x+\dfrac{4}{7}\right) \times \left(
+    \dfrac{4}{7}\,x-\dfrac{4}{7}\right) $\\
+    $F=-\left( 6\,x-6\right) ^{2}$
+  \end{multicols}
+
+  \exercice
+  Résoudre l'équation :
+  \[ \cfrac{3\,x+3}{6}-\cfrac{-6\,x+6}{3}=\cfrac{-6\,x+5}{8}\]
+
+  \exercice
+  Factoriser chacune des expressions littérales suivantes :
+  \begin{multicols}{2}
+    $A=-100\,x^{2}+100$\\
+    $B=\left( 5\,x+2\right) \times \left( 6\,x+6\right) +\left( 6\,x+10\right)
+    \times \left( 6\,x+6\right) $\\
+    $C=\left( 5\,x-9\right) ^{2}-4\,x^{2}$\\
+    $D=9\,x^{2}-54\,x+81$\\
+    $E=\left( -2\,x+10\right) ^{2}+\left( -2\,x+10\right) \times \left(
+    -5\,x+2\right) $\\
+    $F=\left( 2\,x-6\right) \times \left( 9\,x+3\right) -\left( 9\,x+3\right) $
+  \end{multicols}
+
+
+  \exercice
+  Calculer les expressions suivantes et donner le résultat sous la forme d'une
+  fraction irréductible.
+  \begin{multicols}{3}\noindent
+    \[ \thenocalcul = \cfrac{6}{5}\div\left(\cfrac{-13}{9}-\cfrac{9}{11}\right)
+      \]
+    \columnbreak\stepcounter{nocalcul}
+    \[ \thenocalcul = \cfrac{-80}{7}+\cfrac{5}{7}\times\cfrac{7}{15}\]
+    \columnbreak\stepcounter{nocalcul}
+    \[ \thenocalcul = \cfrac{\cfrac{-1}{3}-3}{\cfrac{7}{10}-10} \]
+  \end{multicols}
+
+  \exercice
+  {\begin{wrapfigure}{r}{4cm}
+      \psset{PointSymbol=none,unit=0.19}
+      \begin{pspicture}(-1.5,-1.5)(19.1,4.06)
+        \SpecialCoor
+        \pstTriangle[PosAngleA=225,PosAngleB=-45,PosAngleC=93,PointNameA=U,PointNameB=H,PointNameC=F](0,0){a}(17.6,0){b}(4.8;48){c}
+        \pstTriangle[PosAngleB=-45,PosAngleC=138,PointSymbolA=none,PointNameA=none,PointNameB=Z,PointNameC=W](0,0){a}(6.6,0){b}(1.8;48){c}
+      \end{pspicture}
+    \end{wrapfigure}\par
+
+    Sur la figure ci-contre, on donne $UW=\unit[1{,}8]{cm}$, $WF=\unit[3]{cm}$,
+    $UH=\unit[17{,}6]{cm}$ et $UZ=\unit[6{,}6]{cm}$.\par
+    Démontrer que les droites $(HF)$ et $(ZW)$ sont parallèles.
+    \vspace{2cm}}
+
+  \exercice
+  \begin{multicols}{2}
+    Sur la figure ci-dessous, les droites $(VB)\text{ et }(YH)$ sont
+    parallèles.\par
+    On donne $ZY=\unit[6{,}8]{cm},\quad ZH=\unit[2{,}7]{cm}, \quad
+    YH=\unit[6]{cm}\quad\text{et}\quad YV~=~\unit[4{,}5]{cm}$.\par
+    Calculer $ZB$ et $VB$, arrondies au centième.
+    \begin{center}
+      \psset{PointSymbol=none,unit=0.27}
+      \begin{pspicture}(-1.5,-1.5)(12.8,4.43)
+        \SpecialCoor
+        \pstTriangle[PosAngleA=225, PosAngleB=-45, PosAngleC=106.48,
+        PointNameA=Z, PointNameB=V,
+        PointNameC=B](0,0){a}(11.3,0){b}(4.48;61.48){c}
+        \pstTriangle[PosAngleB=-45, PosAngleC=151.48, PointSymbolA=none,
+        PointNameA=none, PointNameB=Y,
+        PointNameC=H](0,0){a}(6.8,0){b}(2.7;61.48){c}
+      \end{pspicture}
+    \end{center}
+
+    \columnbreak
+    Sur la figure ci-dessous, les droites $(WS)\text{ et }(OX)$ sont
+    parallèles.\par
+    On donne $FW=\unit[2{,}7]{cm},\quad FS=\unit[4{,}9]{cm}, \quad
+    WS=\unit[3{,}7]{cm}\quad\text{et}\quad OX~=~\unit[2{,}3]{cm}$.\par
+    Calculer $FO$ et $FX$, arrondies au millième.
+    \begin{center}
+      \psset{PointSymbol=none,unit=0.48}
+      \begin{pspicture}(-3.52,-3.76)(4.76,4.15)
+        \SpecialCoor
+        \pstTriangle[PosAngleA=135, PosAngleB=-45, PosAngleC=93.27,
+        PointNameA=F, PointNameB=W,
+        PointNameC=S](0,0){a}(2.7,0){b}(4.9;48.27){c}
+        \pstTriangle[PosAngleB=135, PosAngleC=228.27, PointSymbolA=none,
+        PointNameA=none, PointNameB=O,
+        PointNameC=X](0,0){a}(-1.67,0){b}(-3.04;48.27){c}
+      \end{pspicture}
+    \end{center}
+
+  \end{multicols}
+
+  \exercice
+  \begin{multicols}{2}
+    \begin{enumerate}
+    \item $QLZ$ est un triangle rectangle en $L$ tel que :\par
+      $LZ=\unit[7{,}6]{cm}$ et $QZ=\unit[11{,}1]{cm}$.\par
+      Calculer la mesure de l'angle $\widehat{LQZ}$, arrondie au centième.\par
+      \columnbreak
+    \item $TCJ$ est un triangle rectangle en $T$ tel que :\par
+      $TC=\unit[7{,}5]{cm}$ et $\widehat{TCJ}=49\degres$.\par
+      Calculer la longueur $CJ$, arrondie au centième.\par
+    \end{enumerate}
+  \end{multicols}
+
+  \exercice
+  \begin{multicols}{2}
+    \begin{enumerate}
+    \item On donne
+      $\begin{array}[t]{l}
+        f:~x \longmapsto -9\,x^{2}-8\,x-3 \\ g:~x \longmapsto x-1
+      \end{array}$
+      \begin{enumerate}
+      \item Quelle est l'image de $-3$ par la fonction $f$ ?
+      \item Quelle est l'image de $3$ par la fonction $g$ ?
+      \item Calculer $f\,(4)$.
+      \item Calculer $g\,(-3)$.
+      \end{enumerate}
+    \item Voici un tableau de valeurs correspondant à une fonction $h$.\par
+      \renewcommand{\arraystretch}{1.5}
+      \begin{tabularx}{\linewidth}[t]{|c|*7{>{\centering}X|}}
+        \hline
+        $x$ & $-4$ & $-3$ & $-2$ & $-1$ & $0$ & $1$ & $2$ \tabularnewline \hline
+        $h\,(x)$ & $2$ & $-4$ & $-1$ & $0$ & $-2$ & $-3$ & $1$ \tabularnewline
+        \hline
+      \end{tabularx} \medskip
+      \begin{enumerate}
+      \item Quelle est l'image de $1$ par la fonction $h$ ?
+      \item Compléter : $h\,(2)=\ldots\ldots$
+      \item Compléter : $h\,(\ldots\ldots)=-2$
+      \item Quel est l'antécédent de $-1$ par la fonction $h$ ?
+      \end{enumerate}
+      \columnbreak
+    \item Le graphique ci-dessous représente une fonction $k$ : \par
+      \begin{center}
+        \psset{unit=8mm, algebraic, dotsize=4pt 4}
+        \begin{pspicture*}(-4.2,-4.2)(4.2,4.2)
+          \psgrid[subgriddiv=2, gridwidth=.6pt,subgridcolor=lightgray,
+          gridlabels=0pt]
+          \psaxes[linewidth=1.2pt,]{->}(0,0)(-4.2,-4.2)(4.2,4.2)
+          \psplot[plotpoints=200, linewidth=1.5pt,
+          linecolor=DarkRed]{-4.2}{4.2}{2/15*x^4+13/30*x^3-2/15*x^2+17/30*x^1-1}
+          \psdots (-4, 1) (-2, -4) (-1, -2) (0, -1) (1, 0)
+        \end{pspicture*}
+      \end{center}
+      \begin{enumerate}
+      \item Compléter : $k\,(\ldots\ldots)=1$
+      \item Donner un antécédent de 0 par la fonction $k$.
+      \item Compléter : $k\,(-2)=\ldots\ldots$
+      \item Quelle est l'image de $0$ par la fonction $k$ ?
+      \end{enumerate}
+    \end{enumerate}
+  \end{multicols}
+
+  \exercice
+  \begin{enumerate}
+  \item Les nombres \nombre{19034} et \nombre{3100} sont-ils premiers entre eux
+    ?
+  \item Calculer le plus grand commun diviseur (\textsc{pgcd}) de
+    \nombre{19034} et \nombre{3100}.
+  \item Simplifier la fraction $\cfrac{\nombre{19034}}{\nombre{3100}}$ pour la
+    rendre irréductible en indiquant la méthode.
+
+  \end{enumerate}
+
+  \exercice
+  Dans une urne, il y a 1 boule verte (V), 2 boules bleues (B) et 3 boules
+  rouges (R), indiscernables au toucher. On tire successivement et sans remise
+  deux boules.
+  \begin{enumerate}
+  \item Quelle est la probabilité de tirer une boule bleue au premier tirage?
+  \item Construire un arbre des probabilités décrivant l'expérience aléatoire.
+  \item Quelle est la probabilité que la première boule soit rouge et la
+    deuxième soit bleue?
+  \item Quelle est la probabilité que la deuxième boule soit verte ?
+  \end{enumerate}
+
+  \exercice
+  Calculer les expressions suivantes et donner l'écriture scientifique du
+  résultat.
+  \begin{multicols}{2}\noindent
+    \[ \thenocalcul = \cfrac{\nombre{3,2} \times 10^{-4} \times \nombre{30}
+        \times 10^{3}}{\nombre{24} \times \big( 10^{-2} \big) ^2}\]
+    \columnbreak\stepcounter{nocalcul}%
+    \[ \thenocalcul = \cfrac{\nombre{10} \times 10^{-5} \times \nombre{810}
+        \times 10^{-7}}{\nombre{0,9} \times \big( 10^{9} \big) ^3}\]
+  \end{multicols}
+
+  \exercice
+  \begin{enumerate}
+  \item Calculer les expressions suivantes et donner le résultat sous la forme
+    $a\,\sqrt{b}$ avec $a$ et $b$ entiers, $b$ le plus petit possible.
+    \begin{multicols}{2}\noindent
+      \[ \thenocalcul = 2\,\sqrt{28}+4\,\sqrt{112}+3\,\sqrt{63}\]
+      \columnbreak\stepcounter{nocalcul}%
+      \[ \thenocalcul = \sqrt{80}\times\sqrt{45}\times\sqrt{20}\]
+    \end{multicols}\vspace{-3ex}
+  \item Calculer les expressions suivantes et donner le résultat sous la forme
+    $a+b\,\sqrt{c}$ avec $a$, $b$ et $c$ entiers.
+    \stepcounter{nocalcul}%
+    \begin{multicols}{2}\noindent
+      \[ \thenocalcul = \left( 4\,\sqrt{10}-2\,\sqrt{6} \right)^2\]
+      \columnbreak\stepcounter{nocalcul}%
+      \[ \thenocalcul = \left( 2\,\sqrt{5}+4\,\sqrt{3} \right)^2\]
+    \end{multicols}\vspace{-3ex}
+  \item Calculer les expressions suivantes et donner le résultat sous la forme
+    d'un nombre entier.
+
+    \stepcounter{nocalcul}%
+    \begin{multicols}{2}\noindent
+      \[ \thenocalcul = \left( 3-3\,\sqrt{3} \right)\left( 3+3\,\sqrt{3}
+        \right)\]
+      \columnbreak\stepcounter{nocalcul}%
+      \[ \thenocalcul = \frac{32\,\sqrt{45}}{12\,\sqrt{80}}\]
+    \end{multicols}\vspace{-3ex}
+  \end{enumerate}
+
+  \exercice
+  Résoudre le système d'équations suivant :
+  $\left\lbrace
+  \begin{array}{rcrcl}
+    7\,x & + & 4\,y & = & 17 \\
+    4\,x & + & 8\,y & = & 4
+  \end{array}
+  \right.$
+  \label{LastPage}
+  \newpage
+  \currentpdfbookmark{Le corrigé des exercices}{Corrigé}
+  \lhead{\textsl{{\footnotesize Page \thepage/ \pageref{LastCorPage}}}}
+  \setcounter{page}{1} \setcounter{exo}{0}
+
+  \exercice*
+  \setlength{\columnsep}{2mm}
+  \begin{multicols}{2}\noindent \small
+    ($d_1$) est la droite représentative de la fonction $f$.
+    \begin{enumerate}
+    \item $2,5$ est l'image de $3$ par la \hbox{fonction \textit{f}}.
+    \item $-4$ est un antécédent de $0,5$ par la \hbox{fonction \textit{f}}.
+    \item
+      \begin{flushleft}
+        On sait que $g(0)=-1$ et $g(3)=-3-1=-4$.
+      \end{flushleft}
+    \item
+      \begin{flushleft}
+        On lit l'ordonnée à l'origine et le coefficient de la fonction affine
+        sur le graphique.\\
+        $h(x)=a\,x+b$ avec $b=4$ et $a=\dfrac{+4}{+2}=2$.\\
+        L'expression de la fonction $h$ est $h(x)=2\,x+4$.
+      \end{flushleft}
+    \end{enumerate}
+  \end{multicols}
+  \vspace{0.45cm}
+  \begin{minipage}{0.5\linewidth}
+    \psset{unit=0.7cm}
+    \begin{center}
+      \begin{pspicture}(-5, -5)(5, 5)
+        \psgrid[subgriddiv=2, gridlabels=8pt](0,0)(-5, -5)(5, 5)
+        \psline[linewidth=1.2pt]{->}(-5, 0)(5, 0)
+        \psline[linewidth=1.2pt]{->}(0, -5)(0, 5)
+        \psline (-5, 0.2142857142857144)(5, 3.071428571428571)
+        \rput(-5.5, 0.7142857142857144){($d_1$)}
+        \psline (4.0, -5)(-5, 4.0)
+        \rput(4.5, -5.5){($d_2$)}
+        \psline[linestyle=dashed,linewidth=1.1pt]{->}(3.0, 0)(3.0, 1.25)
+        \psline[linestyle=dashed,linewidth=1.1pt]{->}(3.0, 1.25)(3.0, 2.5)
+        \psline[linestyle=dashed,linewidth=1.1pt]{->}(3.0, 2.5)(1.5, 2.5)
+        \psline[linestyle=dashed,linewidth=1.1pt]{->}(1.5, 2.5)(0, 2.5)
+        \psline[linestyle=dashed,linewidth=1.1pt]{->}(0, 0.5)(-2.0, 0.5)
+        \psline[linestyle=dashed,linewidth=1.1pt]{->}(-2.0, 0.5)(-4.0, 0.5)
+        \psline[linestyle=dashed,linewidth=1.1pt]{->}(-4.0, 0.5)(-4.0, 0.25)
+        \psline[linestyle=dashed,linewidth=1.1pt]{->}(-4.0, 0.25)(-4.0, 0)
+        \psdot [dotsize=4.5pt,dotstyle=x](0, -1.0)
+        \psdot [dotsize=4.5pt,dotstyle=x](3.0, -4.0)
+      \end{pspicture}
+    \end{center}
+  \end{minipage}
+  \begin{minipage}{0.5\linewidth}
+    \psset{unit=0.7cm}
+    \begin{center}
+      \begin{pspicture}(-5, -5)(5, 5)
+        \psgrid[subgriddiv=2, gridlabels=8pt](0,0)(-5, -5)(5, 5)
+        \psline[linewidth=1.2pt]{->}(-5, 0)(5, 0)
+        \psline[linewidth=1.2pt]{->}(0, -5)(0, 5)
+        \psline (-4.5, -5)(0.5, 5)
+        \rput(-5.0, -5.5){($d_3$)}
+        \psline[linestyle=dashed,linewidth=1.1pt]{->}(-2.0, 0.0)(-2.0, 2.0)
+        \psline[linestyle=dashed,linewidth=1.1pt]{->}(-2.0, 2.0)(-2.0, 4.0)
+        \psline[linestyle=dashed,linewidth=1.1pt]{->}(-2.0, 4.0)(-1.0, 4.0)
+        \psline[linestyle=dashed,linewidth=1.1pt]{->}(-1.0, 4.0)(0, 4.0)
+        \rput(-2.75, 2.0){(+4)}
+        \rput(-1.0, 4.5){(+2)}
+      \end{pspicture}
+    \end{center}
+  \end{minipage}
+  \vspace{0.45cm}
+
+  \exercice*
+  \begin{enumerate}
+  \item Donner la décomposition en facteurs premiers des nombres suivants, et
+    préciser quand il s'agit d'un nombre premier :\par
+    \begin{multicols}{2}
+      \begin{align*}
+        262
+        & = 2 \times 131\\
+      \end{align*}
+      \begin{align*}
+        867
+        & = 3 \times 289\\
+        & = 3 \times 17 \times 17\\
+      \end{align*}
+      \begin{align*}
+        1152
+        & = 2 \times 576\\
+        & = 2 \times 2 \times 288\\
+        & = 2 \times 2 \times 2 \times 144\\
+        & = 2 \times 2 \times 2 \times 2 \times 72\\
+        & = 2 \times 2 \times 2 \times 2 \times 2 \times 36\\
+        & = 2 \times 2 \times 2 \times 2 \times 2 \times 2 \times 18\\
+        & = 2 \times 2 \times 2 \times 2 \times 2 \times 2 \times 2 \times 9\\
+        & = 2 \times 2 \times 2 \times 2 \times 2 \times 2 \times 2 \times 3
+        \times 3\\
+      \end{align*}
+      139 est un nombre premier.\par
+      \begin{align*}
+        1512
+        & = 2 \times 756\\
+        & = 2 \times 2 \times 378\\
+        & = 2 \times 2 \times 2 \times 189\\
+        & = 2 \times 2 \times 2 \times 3 \times 63\\
+        & = 2 \times 2 \times 2 \times 3 \times 3 \times 21\\
+        & = 2 \times 2 \times 2 \times 3 \times 3 \times 3 \times 7\\
+      \end{align*}
+    \end{multicols}
+  \item En déduire le PGCD et le PPCM des nombres 1\,512 et 1\,152.\par
+    D'après la question 1), on sait que les nombres 1\,512 et 1\,152 ont comme
+    facteurs premiers communs :
+    $2 , 2 , 2 , 3 , 3$.\par
+    On en déduit que le PGCD des nombres 1\,512 et 1\,152 est :
+    $2 \times 2 \times 2 \times 3 \times 3 = 72.$\par
+    Il existe plusieurs méthodes pour calculer le PPCM de 1\,512 et de
+    1\,152.\par
+    En voici deux :
+    \begin{enumerate}
+    \item On peut simplement utiliser la formule :
+      $a \times b = PGCD(a;~b) \times PPCM(a;~b)$.\par
+      Donc : $PPCM(1\,512;~1\,152) = \dfrac{1\,512\times1\,152}{72} = 24\,192.$
+    \item On peut aussi multiplier un nombre par les "facteurs complémentaires"
+      de l'autre.
+      Ces "facteurs complémentaires" sont les facteurs qui complètent le PGCD
+      pour former le nombre.\par
+      Comme $PGCD(1\,512;~1\,152) = 72 = 2 \times 2 \times 2 \times 3 \times
+      3$, alors les "facteurs complémentaires" de $1\,512 = 2 \times 2 \times 2
+      \times 3 \times 3 \times 3 \times 7$ sont : 3 , 7.
+      On en déduit que $PPCM(1\,512;~1\,152) = 1\,152 \times 3 \times 7 =
+      24\,192.$
+    \end{enumerate}
+  \item Pour obtenir un carré parfait, il faut que sa décomposition en facteurs
+    premiers ne contienne que des facteurs apparaissant un nombre pair de fois.
+    D'après la question 1, la décomposition en facteurs premiers de 262
+    est : \par
+    $262 = 2 \times 131.$\par
+    Il faut donc encore multiplier ce nombre par
+    les facteurs
+    2 et
+    131.\par
+    Le nombre cherché est par conséquent 262 et le carré parfait obtenu est
+    68\,644.
+  \item Le moyen le plus rapide de simplifier cette fraction estde diviser le
+    numérateur et le dénominateur par leur PGCD. D'après la question 2), 
+    PGCD(1\,512;~1\,152) = 72, donc on obtient :\par
+    $\dfrac{1\,512{\scriptstyle \div 72}}{1\,152{\scriptstyle \div 72}} =
+    \dfrac{21}{16}.$
+  \item Il faut mettre les fractions au même dénominateur. Grâceà la question
+    2), nous avons déjà un dénominateur commun : le PPCM des nombres 1\,512 et
+    1\,152, qui est par définition le plus petitmultiple commun de ces deux
+    nombres.\par
+    $\dfrac{27{\scriptstyle \times 16}}{1\,512{\scriptstyle \times 16}} +
+    \dfrac{10{\scriptstyle \times 21}}{1\,152{\scriptstyle \times 21}} =
+    \dfrac{432}{24\,192} + \dfrac{210}{24\,192} = \dfrac{642{\scriptstyle \div
+        6}}{24\,192{\scriptstyle \div 6}} = \dfrac{107}{4\,032}.$
+  \end{enumerate}
+
+  \exercice*
+  Développer chacune des expressions littérales suivantes :
+  \begin{multicols}{2}
+    $A=\left( 10\,x-5\right) \times \left( 5\,x+10\right) $\\
+    $A=10\,x\times 5\,x+10\,x\times 10-5\times 5\,x-5\times 10$\\
+    $A=50\,x^{2}+100\,x-25\,x-50$\\
+    $A=50\,x^{2}+\left( 100-25\right) \,x-50$
+    \\
+    \fbox{$A=50\,x^{2}+75\,x-50$}\\
+
+    $B=\left( 7\,x+6\right) \times \left( 7\,x-6\right) $\\
+    $B=\left( 7\,x\right) ^{2}-6^{2}$
+    \\
+    \fbox{$B=49\,x^{2}-36$}\\
+
+    $C=\left( 8\,x+5\right) ^{2}$\\
+    $C=\left( 8\,x\right) ^{2}+2\times 8\,x\times 5+5^{2}$
+    \\
+    \fbox{$C=64\,x^{2}+80\,x+25$}\\
+
+    $D=\left( 4\,x-6\right) ^{2}$\\
+    $D=\left( 4\,x\right) ^{2}-2\times 4\,x\times 6+6^{2}$
+    \\
+    \fbox{$D=16\,x^{2}-48\,x+36$}\\
+
+    $E=\left( \dfrac{4}{7}\,x+\dfrac{4}{7}\right) \times \left(
+    \dfrac{4}{7}\,x-\dfrac{4}{7}\right) $\\
+    $E=\left( \dfrac{4}{7}\,x\right) ^{2}-\left( \dfrac{4}{7}\right) ^{2}$
+    \\
+    \fbox{$E=\dfrac{16}{49}\,x^{2}-\dfrac{16}{49}$}\\
+
+    $F=-\left( 6\,x-6\right) ^{2}$\\
+    $F=-\left( \left( 6\,x\right) ^{2}-2\times 6\,x\times 6+6^{2}\right) $\\
+    $F=-\left( 36\,x^{2}-72\,x+36\right) $
+    \\
+    \fbox{$F=-36\,x^{2}+72\,x-36$}\\
+
+  \end{multicols}
+
+  \exercice*
+  Résoudre l'équation :
+  \[\cfrac{3\,x+3}{6}-\cfrac{-6\,x+6}{3}=\cfrac{-6\,x+5}{8}\]
+  \[\cfrac{(3\,x+3)_{\times4}}{6_{\times4}}-\cfrac{(-6\,x+6)_{\times8}}{3_{\times8}}=\cfrac{(-6\,x+5)_{\times3}}{8_{\times3}}\]
+  \[\cfrac{12\,x+12-\left( -48\,x+48\right)
+      }{\cancel{24}}=\cfrac{-18\,x+15}{\cancel{24}}\]
+  \[ 12\,x+1248\,x-48=-18\,x+15\]
+  \[60\,x-36=-18\,x+15\]
+  \[60\,x+18\,x=15+36\]
+  \[78\,x=51\]
+  \[x=\cfrac{51}{78}=\cfrac{17}{26}\]
+  \fbox{La solution de cette équation est $\cfrac{17}{26}$\,.}
+
+  \exercice*
+  Factoriser chacune des expressions littérales suivantes :
+  \begin{multicols}{2}
+    $A=-100\,x^{2}+100$\\
+    $A=\sqrt{100}^{2}-\left( \sqrt{100}\,x\right) ^{2}$\\
+    $A=\left( \sqrt{100}+\sqrt{100}\,x\right) \times \left(
+    \sqrt{100}-\sqrt{100}\,x\right) $\\
+    $A=\left( \sqrt{100}\,x+\sqrt{100}\right) \times \left( 10-10\,x\right) $\\
+    $A=\left( \sqrt{100}\,x+\sqrt{100}\right) \times \left( -10\,x+10\right) $
+    \\
+    \fbox{$A=\left( 10\,x+10\right) \times \left( -10\,x+10\right) $}\\
+
+    $B=\left( 5\,x+2\right) \times \left( 6\,x+6\right) +\left( 6\,x+10\right)
+    \times \left( 6\,x+6\right) $\\
+    $B=\left( 6\,x+6\right) \times \left( 5\,x+2+6\,x+10\right) $\\
+    $B=\left( 6\,x+6\right) \times \left( 5\,x+6\,x+2+10\right) $
+    \\
+    \fbox{$B=\left( 6\,x+6\right) \times \left( 11\,x+12\right) $}\\
+
+    $C=\left( 5\,x-9\right) ^{2}-4\,x^{2}$\\
+    $C=\left( 5\,x-9\right) ^{2}-\left( 2\,x\right) ^{2}$\\
+    $C=\left( 5\,x-9+2\,x\right) \times \left( 5\,x-9-2\,x\right) $\\
+    $C=\left( 5\,x+2\,x-9\right) \times \left( 5\,x-2\,x-9\right) $
+    \\
+    \fbox{$C=\left( 7\,x-9\right) \times \left( 3\,x-9\right) $}\\
+
+    $D=9\,x^{2}-54\,x+81$\\
+    $D=\left( 3\,x\right) ^{2}-2\times 3\,x\times 9+9^{2}$
+    \\
+    \fbox{$D=\left( 3\,x-9\right) ^{2}$}\\
+
+    $E=\left( -2\,x+10\right) ^{2}+\left( -2\,x+10\right) \times \left(
+    -5\,x+2\right) $\\
+    $E=\left( -2\,x+10\right) \times \left( -2\,x+10\right) +\left(
+    -2\,x+10\right) \times \left( -5\,x+2\right) $\\
+    $E=\left( -2\,x+10\right) \times \left( -2\,x+10-5\,x+2\right) $\\
+    $E=\left( -2\,x+10\right) \times \left( -2\,x-5\,x+10+2\right) $
+    \\
+    \fbox{$E=\left( -2\,x+10\right) \times \left( -7\,x+12\right) $}\\
+
+    $F=\left( 2\,x-6\right) \times \left( 9\,x+3\right) -\left( 9\,x+3\right)
+    $\\
+    $F=\left( 2\,x-6\right) \times \left( 9\,x+3\right) -\left( 9\,x+3\right)
+    \times 1$\\
+    $F=\left( 9\,x+3\right) \times \left( 2\,x-6-1\right) $
+    \\
+    \fbox{$F=\left( 9\,x+3\right) \times \left( 2\,x-7\right) $}\\
+
+  \end{multicols}
+
+  \exercice*
+  Calculer les expressions suivantes et donner le résultat sous la forme d'une
+  fraction irréductible.
+  \begin{multicols}{3}\noindent
+    \[ \thenocalcul = \cfrac{6}{5}\div\left(\cfrac{-13}{9}-\cfrac{9}{11}\right)
+      \]
+    \[ \thenocalcul = \cfrac{6}{5}\div\left(\dfrac{-13_{\times 11}}{9_{\times
+          11}}-\dfrac{9_{\times 9}}{11_{\times 9}}\right) \]
+    \[ \thenocalcul =
+      \cfrac{6}{5}\div\left(\dfrac{-143}{99}-\dfrac{81}{99}\right) \]
+    \[ \thenocalcul = \cfrac{6}{5}\div\cfrac{-224}{99}\]
+    \[ \thenocalcul = \cfrac{6}{5}\times\cfrac{-99}{224}\]
+    \[ \thenocalcul =
+      \cfrac{3\times\cancel{2}}{-5\times\bcancel{-1}}\times\cfrac{99\times\bcancel{-1}}{112\times\cancel{2}}\]
+    \[ \boxed{\thenocalcul = \cfrac{-297}{560}} \]
+    \columnbreak\stepcounter{nocalcul}
+    \[ \thenocalcul = \cfrac{-80}{7}+\cfrac{5}{7}\times\cfrac{7}{15}\]
+    \[ \thenocalcul =
+      \cfrac{-80}{7}+\cfrac{1\times\cancel{5}}{1\times\bcancel{7}}\times\cfrac{1\times\bcancel{7}}{3\times\cancel{5}}\]
+    \[ \thenocalcul = \cfrac{-80}{7}+\cfrac{1}{3}\]
+    \[ \thenocalcul = \dfrac{-80_{\times 3}}{7_{\times 3}}+\dfrac{1_{\times
+          7}}{3_{\times 7}}\]
+    \[ \thenocalcul = \dfrac{-240}{21}+\dfrac{7}{21}\]
+    \[ \boxed{\thenocalcul = \cfrac{-233}{21}} \]
+    \columnbreak\stepcounter{nocalcul}
+    \[ \thenocalcul =  \cfrac{\cfrac{-1}{3}-3}{\cfrac{7}{10}-10} \]
+    \[ \thenocalcul = \cfrac{\dfrac{-1}{3}-\dfrac{3_{\times 3}}{1_{\times
+            3}}}{\dfrac{7}{10}-\dfrac{10_{\times 10}}{1_{\times 10}}} \]
+    \[ \thenocalcul =
+      \cfrac{\dfrac{-1}{3}-\dfrac{9}{3}}{\dfrac{7}{10}-\dfrac{100}{10}} \]
+    \[ \thenocalcul = \cfrac{-10}{3}\div\cfrac{-93}{10} \]
+    \[ \thenocalcul = \cfrac{-10}{3}\times\cfrac{-10}{93} \]
+    \[ \thenocalcul =
+      \cfrac{-10}{-3\times\bcancel{-1}}\times\cfrac{10\times\bcancel{-1}}{93} \]
+    \[ \boxed{\thenocalcul = \cfrac{100}{279}} \]
+  \end{multicols}
+
+  \exercice*
+  {\begin{wrapfigure}{r}{4cm}
+      \psset{PointSymbol=none,unit=0.19}
+      \begin{pspicture}(-1.5,-1.5)(19.1,4.06)
+        \SpecialCoor
+        \pstTriangle[PosAngleA=225,PosAngleB=-45,PosAngleC=93,PointNameA=U,PointNameB=H,PointNameC=F](0,0){a}(17.6,0){b}(4.8;48){c}
+        \pstTriangle[PosAngleB=-45,PosAngleC=138,PointSymbolA=none,PointNameA=none,PointNameB=Z,PointNameC=W](0,0){a}(6.6,0){b}(1.8;48){c}
+      \end{pspicture}
+    \end{wrapfigure}\par
+
+    Sur la figure ci-contre, on donne $UZ=\unit[6{,}6]{cm}$,
+    $UH=\unit[17{,}6]{cm}$, $UW=\unit[1{,}8]{cm}$ et $WF=\unit[3]{cm}$.\par
+    Démontrer que les droites $(HF)$ et $(ZW)$ sont parallèles.
+    \par\dotfill{}\\}
+
+  Les points $U$, $Z$, $H$~ et $U$, $W$, $F$ sont alignés dans le même
+  ordre.\par
+  De plus $UF=WF+UW=\unit[4{,}8]{cm}$.\par
+
+  $\left.
+  \renewcommand{\arraystretch}{2}
+  \begin{array}{l}
+    \bullet\cfrac{UH}{UZ}=\cfrac{17{,}6}{6{,}6}=\cfrac{176_{\div22}}{66_{\div22}}=\cfrac{8}{3}\\
+    \bullet\cfrac{UF}{UW}=\cfrac{4{,}8}{1{,}8}=\cfrac{48_{\div6}}{18_{\div6}}=\cfrac{8}{3}
+  \end{array}
+  \right\rbrace$
+  Donc $\cfrac{UH}{UZ}=\cfrac{UF}{UW}$\,.\par
+  D'après la \textbf{réciproque du théorème de Thalès}, \fbox{les droites
+    $(HF)$ et $(ZW)$ sont parallèles.}
+
+
+  \exercice*
+  \begin{multicols}{2}
+    Sur la figure ci-dessous, les droites $(VB)\text{ et }(YH)$ sont
+    parallèles.\par
+    On donne $ZY=\unit[6{,}8]{cm},\quad ZH=\unit[2{,}7]{cm}, \quad
+    YH=\unit[6]{cm}\quad\text{et}\quad YV~=~\unit[4{,}5]{cm}$.\par
+    Calculer $ZB$ et $VB$, arrondies au centième.
+    \begin{center}
+      \psset{PointSymbol=none,unit=0.27}
+      \begin{pspicture}(-1.5,-1.5)(12.8,4.43)
+        \SpecialCoor
+        \pstTriangle[PosAngleA=225, PosAngleB=-45, PosAngleC=106.48,
+        PointNameA=Z, PointNameB=V,
+        PointNameC=B](0,0){a}(11.3,0){b}(4.48;61.48){c}
+        \pstTriangle[PosAngleB=-45, PosAngleC=151.48, PointSymbolA=none,
+        PointNameA=none, PointNameB=Y,
+        PointNameC=H](0,0){a}(6.8,0){b}(2.7;61.48){c}
+      \end{pspicture}
+    \end{center}
+
+    \par\dotfill{}
+    Les points $Z$,~ $Y$,~ $V$ et $Z$, $H$, $B$ sont alignés et les droites
+    $(VB)$ et $(YH)$ sont parallèles.\par
+    D'après le \textbf{théorème de Thalès} :
+    $\qquad\mathbf{\cfrac{ZV}{ZY}=\cfrac{ZB}{ZH}=\cfrac{VB}{YH}}$
+
+    \vspace{1ex}\par
+    De plus $ZV=YV+ZY=\unit[11{,}3]{cm}$
+    \[\frac{11{,}3}{6{,}8}=\frac{ZB}{2{,}7}=\frac{VB}{6}\]
+    $\cfrac{11{,}3}{6{,}8}=\cfrac{ZB}{2{,}7}\quad$ donc
+    $\quad\boxed{ZB=\cfrac{2{,}7\times
+        11{,}3}{6{,}8}\simeq\unit[4{,}49]{cm}}$\par
+    $\cfrac{11{,}3}{6{,}8}=\cfrac{VB}{6}\quad$ donc
+    $\quad\boxed{VB=\cfrac{6\times 11{,}3}{6{,}8}\simeq\unit[9{,}97]{cm}}$\par
+
+    \columnbreak
+    Sur la figure ci-dessous, les droites $(WS)\text{ et }(OX)$ sont
+    parallèles.\par
+    On donne $FW=\unit[2{,}7]{cm},\quad FS=\unit[4{,}9]{cm}, \quad
+    WS=\unit[3{,}7]{cm}\quad\text{et}\quad OX~=~\unit[2{,}3]{cm}$.\par
+    Calculer $FO$ et $FX$, arrondies au millième.
+    \begin{center}
+      \psset{PointSymbol=none,unit=0.48}
+      \begin{pspicture}(-3.52,-3.76)(4.76,4.15)
+        \SpecialCoor
+        \pstTriangle[PosAngleA=135, PosAngleB=-45, PosAngleC=93.27,
+        PointNameA=F, PointNameB=W,
+        PointNameC=S](0,0){a}(2.7,0){b}(4.9;48.27){c}
+        \pstTriangle[PosAngleB=135, PosAngleC=228.27, PointSymbolA=none,
+        PointNameA=none, PointNameB=O,
+        PointNameC=X](0,0){a}(-1.67,0){b}(-3.04;48.27){c}
+      \end{pspicture}
+    \end{center}
+
+    \par\dotfill{}
+    Les points $F$,~ $O$,~ $W$ et $F$, $X$, $S$ sont alignés et les droites
+    $(WS)$ et $(OX)$ sont parallèles.\par
+    D'après le \textbf{théorème de Thalès} :
+    $\qquad\mathbf{\cfrac{FW}{FO}=\cfrac{FS}{FX}=\cfrac{WS}{OX}}$
+
+
+    \[\frac{2{,}7}{FO}=\frac{4{,}9}{FX}=\frac{3{,}7}{2{,}3}\]
+    $\cfrac{3{,}7}{2{,}3}=\cfrac{2{,}7}{FO}\quad$ donc
+    $\quad\boxed{FO=\cfrac{2{,}7\times
+        2{,}3}{3{,}7}\simeq\unit[1{,}678]{cm}}$\par
+    $\cfrac{3{,}7}{2{,}3}=\cfrac{4{,}9}{FX}\quad$ donc
+    $\quad\boxed{FX=\cfrac{4{,}9\times
+        2{,}3}{3{,}7}\simeq\unit[3{,}046]{cm}}$\par
+
+  \end{multicols}
+
+  \exercice*
+  \begin{multicols}{2}
+    \begin{enumerate}
+    \item $QLZ$ est un triangle rectangle en $L$ tel que :\par
+      $LZ=\unit[7{,}6]{cm}$ et $QZ=\unit[11{,}1]{cm}$.\par
+      Calculer la mesure de l'angle $\widehat{LQZ}$, arrondie au centième.\par
+      \dotfill{}\par\vspace{2ex}
+      Dans le triangle $QLZ$ rectangle en $L$,
+      \[\sin\widehat{LQZ}=\cfrac{LZ}{QZ}\]
+      \[ \sin\widehat{LQZ}=\cfrac{7{,}6}{11{,}1}\]
+      \[ \boxed{\widehat{LQZ}=\sin^{-1}\left(\cfrac{7{,}6}{11.1}\right)
+          \simeq43{,}21\degres} \]
+      \columnbreak
+    \item $TCJ$ est un triangle rectangle en $T$ tel que :\par
+      $TC=\unit[7{,}5]{cm}$ et $\widehat{TCJ}=49\degres$.\par
+      Calculer la longueur $CJ$, arrondie au centième.\par
+      \dotfill{}\par\vspace{2ex}
+      Dans le triangle $TCJ$ rectangle en $T$,
+      \[\cos\widehat{TCJ}=\cfrac{TC}{CJ}\]
+      \[ \cos49=\cfrac{7{,}5}{CJ}\]
+      \[ \boxed{CJ=\cfrac{7{,}5}{\cos49} \simeq\unit[11{,}43]{cm}} \]
+    \end{enumerate}
+  \end{multicols}
+
+  \exercice
+  \begin{multicols}{2}
+    \begin{enumerate}
+    \item On donne
+      $\begin{array}[t]{l}
+        f:~x \longmapsto -9\,x^{2}-8\,x-3 \\ g:~x \longmapsto x-1
+      \end{array}$
+      \begin{enumerate}
+      \item Quelle est l'image de $-3$ par la fonction $f$ ?
+        \par $f\,(-3)=-9\times \left( -3\right) ^{2}-8\times \left( -3\right)
+        -3$\par
+        $f\,(-3)=-9\times 9-\left( -24\right) -3$\par
+        $f\,(-3)=-81+24-3$\par
+        $f\,(-3)=-57-3$
+        \par
+        \fbox{$f\,(-3)=-60$}\\
+
+      \item Quelle est l'image de $3$ par la fonction $g$ ?
+        \par $g\,(3)=3-1$\par
+
+        \par
+        \fbox{$g\,(3)=2$}\\
+
+      \item Calculer $f\,(4)$.
+        \par $f\,(4)=-9\times 4^{2}-8\times 4-3$\par
+        $f\,(4)=-9\times 16-32-3$\par
+        $f\,(4)=-144-32-3$
+        \par
+        \fbox{$f\,(4)=-179$}\\
+
+      \item Calculer $g\,(-3)$.
+        \par $g\,(-3)=-3-1$\par
+
+        \par
+        \fbox{$g\,(-3)=-4$}\\
+
+      \end{enumerate}
+    \item Voici un tableau de valeurs correspondant à une fonction $h$.\par
+      \renewcommand{\arraystretch}{1.5}
+      \begin{tabularx}{\linewidth}[t]{|c|*7{>{\centering}X|}}
+        \hline
+        $x$ & $-4$ & $-3$ & $-2$ & $-1$ & $0$ & $1$ & $2$ \tabularnewline \hline
+        $h\,(x)$ & $2$ & $-4$ & $-1$ & $0$ & $-2$ & $-3$ & $1$ \tabularnewline
+        \hline
+      \end{tabularx} \medskip
+      \begin{enumerate}
+      \item L'image de $1$ par la fonction $h$ est $\mathbf{-3}$.
+      \item $h\,(2)=\mathbf{1}$.
+      \item Un antécédent de $-1$ par la fonction $h$ est $\mathbf{-2}$.
+      \item $h\,(\mathbf{0})=-2$.
+      \end{enumerate}
+    \item Le graphique ci-après représente une fonction $k$ : \par
+      \begin{center}
+        \psset{unit=8mm, algebraic, dotsize=4pt 4}
+        \begin{pspicture*}(-4.2,-4.2)(4.2,4.2)
+          \psgrid[subgriddiv=2, gridwidth=.6pt,subgridcolor=lightgray,
+          gridlabels=0pt]
+          \psaxes[linewidth=1.2pt,]{->}(0,0)(-4.2,-4.2)(4.2,4.2)
+          \psplot[plotpoints=200, linewidth=1.5pt,
+          linecolor=DarkRed]{-4.2}{4.2}{2/15*x^4+13/30*x^3-2/15*x^2+17/30*x^1-1}
+          \psdots (-4, 1) (-2, -4) (-1, -2) (0, -1) (1, 0)
+          \psline[linestyle=dashed, linecolor=DarkRed](0, 1)(-4, 1)(-4, 0)
+          \psline[linestyle=dashed, linecolor=DarkRed](0, -4)(-2, -4)(-2, 0)
+          \psline[linestyle=dashed, linecolor=DarkRed](0, -1)(0, -1)(0, 0)
+          \psline[linestyle=dashed, linecolor=DarkRed](0, 0)(1, 0)(1, 0)
+        \end{pspicture*}
+      \end{center}
+      \begin{enumerate}
+      \item Un antécédent de $0$ par la fonction $k$ est $\mathbf{1}$.
+      \item $k\,(\mathbf{-4})=1$.
+      \item $k\,(-2)=\mathbf{-4}$.
+      \item L'image de $0$ par la fonction $k$ est $\mathbf{-1}$.
+      \end{enumerate}
+    \end{enumerate}
+  \end{multicols}
+
+  \exercice*
+  \begin{enumerate}
+  \item Les nombres \nombre{19034} et \nombre{3100} sont-ils premiers entre eux
+    ?\par
+    \nombre{19034} et \nombre{3100} sont deux nombres pairs donc ils sont
+    divisibles par 2.\par
+    \nombre{19034} et \nombre{3100} ne sont donc pas premiers entre eux
+  \item Calculer le plus grand commun diviseur (\textsc{pgcd}) de
+    \nombre{19034} et \nombre{3100}.\par
+    On calcule le \textsc{pgcd} des nombres \nombre{19034} et \nombre{3100} en
+    utilisant l'algorithme d'Euclide.
+    \[ \nombre{19034}=\nombre{3100}\times\nombre{6}+\nombre{434}\]
+    \[ \nombre{3100}=\nombre{434}\times\nombre{7}+\nombre{62}\]
+    \[ \nombre{434}=\nombre{62}\times\nombre{7}+\nombre{0}\]
+    \fbox{Donc le \textsc{pgcd} de \nombre{19034} et \nombre{3100} est 62}.
+
+  \item Simplifier la fraction $\cfrac{\nombre{19034}}{\nombre{3100}}$ pour la
+    rendre irréductible en indiquant la méthode.
+    \begin{align*}
+      \cfrac{\nombre{19034}}{\nombre{3100}} &=
+      \cfrac{\nombre{19034}\div62}{\nombre{3100}\div62}\\
+      &= \boxed{\cfrac{\nombre{307}}{\nombre{50}}}
+    \end{align*}
+  \end{enumerate}
+
+  \exercice*
+  Dans une urne, il y a 1 boule verte (V), 2 boules bleues (B) et 3 boules
+  rouges (R), indiscernables au toucher. On tire successivement et sans remise
+  deux boules.
+  \begin{enumerate}
+  \item Quelle est la probabilité de tirer une boule bleue au premier
+    tirage?\par
+    Il y a 6 boules dans l'urne dont 2 boules bleues. \par
+    La probabilité de tirer une boule bleue au premier tirage est donc
+    $\dfrac{2}{6}$.
+  \item Construire un arbre des probabilités décrivant l'expérience
+    aléatoire.\\ [0,3cm]
+    \psset{unit=1 mm}
+    \psset{linewidth=0.3,dotsep=1,hatchwidth=0.3,hatchsep=1.5,shadowsize=1,dimen=middle}
+    \psset{dotsize=0.7 2.5,dotscale=1 1,fillcolor=black}
+    \psset{arrowsize=1 2,arrowlength=1,arrowinset=0.25,tbarsize=0.7
+      5,bracketlength=0.15,rbracketlength=0.15}
+    \begin{pspicture}(0,0)(80,53)
+      \psline(0,3)(10,23)
+      \psline(10,3)(10,23)
+      \psline(20,3)(10,23)
+      \psline(30,3)(40,23)
+      \psline(40,3)(40,23)
+      \psline(50,3)(40,23)
+      \psline(60,3)(70,23)
+      \psline(80,3)(70,23)
+      \psline(70,3)(70,23)
+      \psline(15,28)(40,53)
+      \psline(40,53)(65,28)
+      \psline(40,53)(40,28)
+      \rput(20,40){$\dfrac{1}{6}$} \rput(37,40){$\dfrac{2}{6}$}
+      \rput(60,40){$\dfrac{3}{6}$}
+      \rput(10,26){V} \rput(40,26){B} \rput(70,26){R}
+      \rput(0,10){$\dfrac{0}{5}$} \rput(7,10){$\dfrac{2}{5}$}
+      \rput(20,10){$\dfrac{3}{5}$}
+      \rput(0,0){V} \rput(10,0){B} \rput(20,0){R}
+      \rput(30,10){$\dfrac{1}{5}$} \rput(37,10){$\dfrac{1}{5}$}
+      \rput(50,10){$\dfrac{3}{5}$}
+      \rput(30,0){V} \rput(40,0){B} \rput(50,0){R}
+      \rput(60,10){$\dfrac{1}{5}$} \rput(67,10){$\dfrac{2}{5}$}
+      \rput(80,10){$\dfrac{2}{5}$}
+      \rput(60,0){V} \rput(70,0){B} \rput(80,0){R}
+    \end{pspicture}
+    \vspace{0.3cm}
+  \item Quelle est la probabilité que la première boule soit rouge et la
+    deuxième soit bleue?\par
+    On utilise l'arbre construit précédemment.\par
+    $p(R,B)=\dfrac{3}{6} \times \dfrac{2}{5} = \dfrac{6}{30}$\par
+    La probabilité que la première boule soit rouge et la deuxième soit bleue
+    est égale à $\dfrac{6}{30}$.
+  \item Quelle est la probabilité que la deuxième boule soit verte ?\par
+    On note (?, V) l'évènement: la deuxième boule tirée est verte. \par
+    $p(?,V)=p(V,V)+p(B,V)+p(R,V,)=\dfrac{1}{6}\times
+    \dfrac{0}{5}+\dfrac{2}{6}\times \dfrac{1}{5}+\dfrac{3}{6}\times
+    \dfrac{1}{5}=\dfrac{5}{30}$
+  \end{enumerate}
+
+  \exercice*
+  Calculer les expressions suivantes et donner l'écriture scientifique du
+  résultat.
+  \begin{multicols}{2}\noindent
+    \[ \thenocalcul = \cfrac{\nombre{3,2} \times 10^{-4} \times \nombre{30}
+        \times 10^{3}}{\nombre{24} \times \big( 10^{-2} \big) ^2}\]
+    \[ \thenocalcul = \cfrac{\nombre{3,2} \times \nombre{30}}{\nombre{24}}
+      \times \cfrac{10^{-4+3}}{10^{-2 \times 2}}\]
+    \[ \thenocalcul = \nombre{4} \times 10^{-1-(-4)}\]
+    \[ \boxed{\thenocalcul = \nombre{4}  \times 10^{3}} \]
+    \columnbreak\stepcounter{nocalcul}%
+    \[ \thenocalcul = \cfrac{\nombre{10} \times 10^{-5} \times \nombre{810}
+        \times 10^{-7}}{\nombre{0,9} \times \big( 10^{9} \big) ^3}\]
+    \[ \thenocalcul = \cfrac{\nombre{10} \times \nombre{810}}{\nombre{0,9}}
+      \times \cfrac{10^{-5+(-7)}}{10^{9 \times 3}}\]
+    \[ \thenocalcul = \nombre{9000} \times 10^{-12-27}\]
+    \[ \thenocalcul = \nombre{9}  \times 10^{3} \times 10^{-39}\]
+    \[ \boxed{\thenocalcul = \nombre{9}  \times 10^{-36}} \]
+  \end{multicols}
+
+  \exercice*
+  \begin{enumerate}
+  \item Calculer les expressions suivantes et donner le résultat sous la forme
+    $a\,\sqrt{b}$ avec $a$ et $b$ entiers, $b$ le plus petit possible.
+    \begin{multicols}{2}\noindent
+      \[ \thenocalcul = 2\,\sqrt{28}+4\,\sqrt{112}+3\,\sqrt{63}\]
+      \[ \thenocalcul =
+        2\,\sqrt{4}\times\sqrt{7}+4\,\sqrt{16}\times\sqrt{7}+3\,\sqrt{9}\times\sqrt{7}\]
+      \[ \thenocalcul =
+        2\times2\times\sqrt{7}+4\times4\times\sqrt{7}+3\times3\times\sqrt{7}\]
+      \[ \thenocalcul = 4\,\sqrt{7}+16\,\sqrt{7}+9\,\sqrt{7}\]
+      \[ \boxed{\thenocalcul = 29\,\sqrt{7}} \]
+      \columnbreak\stepcounter{nocalcul}%
+      \[ \thenocalcul = \sqrt{80}\times\sqrt{45}\times\sqrt{20}\]
+      \[ \thenocalcul =
+        \sqrt{16}\times\sqrt{5}\times\sqrt{9}\times\sqrt{5}\times\sqrt{4}\times\sqrt{5}\]
+      \[ \thenocalcul =
+        4\times\sqrt{5}\times3\times\sqrt{5}\times2\times\sqrt{5}\]
+      \[ \thenocalcul = 24\times\left(\sqrt{5}\right)^2\times\sqrt{5}\]
+      \[ \thenocalcul = 24\times5\times\sqrt{5}\]
+      \[ \boxed{\thenocalcul = 120\,\sqrt{5}} \]
+    \end{multicols}
+  \item Calculer les expressions suivantes et donner le résultat sous la forme
+    $a+b\,\sqrt{c}$ avec $a$, $b$ et $c$ entiers.
+    \stepcounter{nocalcul}%
+    \begin{multicols}{2}\noindent
+      \[ \thenocalcul = \left( 4\,\sqrt{10}-2\,\sqrt{6} \right)^2\]
+      \[ \thenocalcul = \left(
+        4\,\sqrt{10}\right)^2-2\times4\,\sqrt{10}\times2\,\sqrt{6}+\left(
+        2\,\sqrt{6}\right)^2\]
+      \[ \thenocalcul = 16\times 10 -16\,\sqrt{60}+4\times 6\]
+      \[ \boxed{\thenocalcul = 184-16\,\sqrt{60}} \]
+      \columnbreak\stepcounter{nocalcul}%
+      \[ \thenocalcul = \left( 2\,\sqrt{5}+4\,\sqrt{3} \right)^2\]
+      \[ \thenocalcul = \left(
+        2\,\sqrt{5}\right)^2+2\times2\,\sqrt{5}\times4\,\sqrt{3}+\left(
+        4\,\sqrt{3}\right)^2\]
+      \[ \thenocalcul = 4\times 5 +16\,\sqrt{15}+16\times 3\]
+      \[ \boxed{\thenocalcul = 68+16\,\sqrt{15}} \]
+    \end{multicols}
+  \item Calculer les expressions suivantes et donner le résultat sous la forme
+    d'un nombre entier.
+
+    \stepcounter{nocalcul}%
+    \begin{multicols}{2}\noindent
+      \[ \thenocalcul = \left( 3-3\,\sqrt{3} \right)\left( 3+3\,\sqrt{3}
+        \right)\]
+      \[ \thenocalcul = 3^2-\left( 3\,\sqrt{3}\right)^2\]
+      \[ \thenocalcul = 9-9\times 3\]
+      \[ \boxed{\thenocalcul = -18} \]
+      \columnbreak\stepcounter{nocalcul}%
+      \[ \thenocalcul = \frac{32\,\sqrt{45}}{12\,\sqrt{80}}\]
+      \[ \thenocalcul =
+        \frac{32\times\sqrt{9}\times\cancel{\sqrt{5}}}{12\times\sqrt{16}\times\cancel{\sqrt{5}}}\]
+      \[ \thenocalcul = \frac{32\times 3}{12\times 4}\]
+      \[ \boxed{\thenocalcul = 2} \]
+    \end{multicols}
+  \end{enumerate}
+
+  \exercice*
+  Résoudre le système d'équations suivant :
+  $\left\lbrace
+  \begin{array}{rcrcll}
+    7\,x & + & 4\,y & = & 17 & \qquad\hbox{\footnotesize$\mathit{(\times 2)}$}
+    \\
+    4\,x & + & 8\,y & = & 4 & \qquad\hbox{\footnotesize$\mathit{(\times \left(
+        -1\right))}$}
+  \end{array}
+  \right.$
+  \vspace{2ex}
+  \begin{multicols}{2}\noindent
+
+    \[ \left\lbrace
+      \begin{array}{rcrcl}
+        14\,x & + & 8\,y & = & 34 \\
+        -4\,x & - & 8\,y & = & -4
+      \end{array}
+      \right.\quad\text{\footnotesize On ajoute les deux lignes}\]
+    \[ 14\,x\cancel{+8\,y}-4\,x\cancel{-8\,y}=34-4\]
+    \[ 10\,x=30\]
+    \[ \boxed{x=\frac{30}{10}=3} \]
+    \columnbreak\par
+    $7\,x+4\,y=17\quad\text{et}\quad x=3\quad\text{donc :}$
+    \[7\times 3 +4\,y=17\]
+
+    \[ 4\,y=17-21\]
+    \[ \boxed{y=\frac{-4}{4}=-1} \]
+  \end{multicols}
+  \underline{La solution de ce système d'équations est $(x;~y)=(3;~-1)$.}\par
+  {Vérification : $\left\lbrace
+    \begin{array}{l}
+      7\,\times 3 +4\,\times \left( -1\right)=21 -4=17 \\
+      4\,\times 3 +8\,\times \left( -1\right)=12 -8=4
+    \end{array}
+    \right.$}
+  \label{LastCorPage}
+\end{document}
