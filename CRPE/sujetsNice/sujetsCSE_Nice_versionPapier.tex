@@ -1,0 +1,27 @@
+\documentclass[a4paper]{article}
+\usepackage[cm]{fullpage}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[french]{babel}
+\usepackage{hyperref}
+\usepackage{pdfpages}
+
+\newcommand\cse[2]{%
+	\includepdf[pagecommand={\thispagestyle{plain}},addtotoc={1,section,1,{#2},}]{CSE/CSE_#1}
+}
+
+\newcommand\txt[5]{%
+	\includepdf[pagecommand={\thispagestyle{plain}},addtotoc={1,subsection,3,{#3. #4. \textit{#5}},}]{TXT/sujet#1_txt#2}
+}
+
+\title{\vfill Sujets de CSE}
+\author{Académie de Nice\thanks{\url{http://www2.ac-nice.fr/cid71224/concours-de-recrutement-de-professeurs-des-ecoles-crpe.html}}}
+\date{CRPE 2015 \vfill}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\input{cse}
+\tableofcontents
+\end{document}

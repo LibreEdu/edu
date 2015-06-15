@@ -1,0 +1,48 @@
+\documentclass[a4paper]{article}
+\usepackage[cm]{fullpage}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[french]{babel}
+\usepackage[colorlinks=true]{hyperref}
+%\usepackage{shorttoc}
+\usepackage{pdfpages}
+
+\newcommand\eps[4]{%
+	\includepdf[pagecommand={\thispagestyle{plain}},addtotoc={1,subsection,2,{#2 -- #3 -- #4},}]{EPS/EPS_#1}
+}
+
+\newcommand\cse[2]{%
+	\includepdf[pagecommand={\thispagestyle{plain}},addtotoc={1,subsection,2,{#2},}]{CSE/CSE_#1}
+}
+
+\newcommand\txt[5]{%
+	\includepdf[pagecommand={\thispagestyle{plain}},addtotoc={1,subsubsection,3,{#3. #4. \textit{#5}},}]{TXT/sujet#1_txt#2}
+}
+
+
+\title{Sujets d’EPS et de CSE}
+\author{\href{http://www2.ac-nice.fr/cid71224/concours-de-recrutement-de-professeurs-des-ecoles-crpe.html}{Académie de Nice}}
+\date{CRPE 2015}
+
+\begin{document}
+\maketitle
+
+%\shorttableofcontents{Sommaire}{1} 
+%\addcontentsline{toc}{section}{Sommaire}
+%\setcounter{tocdepth}{2}
+
+%\renewcommand{\contentsname}{Sommaire}
+\tableofcontents
+
+\section{Sujets de l’éducation physique et sportive}
+\input{eps}
+
+\section{Sujets de connaissance du système éducatif}
+\input{cse}
+
+%\addcontentsline{toc}{section}{Table des matières}
+%\tableofcontents
+
+\end{document}
