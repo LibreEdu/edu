@@ -1,0 +1,52 @@
+\ifthenelse{\boolean{papier}}{\clearemptydoublepage}{}
+\chapter{Questionnaire papier}
+\label{questionnairePapier}
+Questionnaire initial qui a été testé à l’école maternelle Jean-Henri Fabre d’Avignon.
+
+
+\ifthenelse{\boolean{caco}}{%
+	\includepdf[pages=-,pagecommand=\thispagestyle{plain},scale=0.7,frame=true,offset=15 0]{tex/questionnaire_2015-04-23.pdf}
+}{%
+	\ifthenelse{\boolean{papier}}{%	
+		\includepdf[pages=-,pagecommand=\thispagestyle{plain},scale=0.61,frame=true,offset=-29 50]{tex/questionnaire_2015-04-23.pdf}		
+	}{%
+		\includepdf[pages=-,pagecommand=\thispagestyle{plain},scale=0.67,frame=true,offset=0 40]{tex/questionnaire_2015-04-23.pdf}
+	}
+}
+
+
+\ifthenelse{\boolean{papier}}{\clearemptydoublepage}{}
+\chapter{Questionnaire en ligne}
+\label{questionnaireWeb}
+Version texte du questionnaire en ligne réalisé en utilisant Google Forms. Ce questionnaire au format texte était utilisable par les personnes ne désirant pas utiliser le formulaire Google. Il est suivi de deux images de la démarche d’investigation auxquelles le questionnaire fait référence aux lignes~28 et 29.
+
+\ifthenelse{\boolean{caco}}{%
+	\includepdf[pages=-,pagecommand=\thispagestyle{plain},scale=0.7,frame=true,offset=15 0]{www/questionnaire}
+}{%
+	\ifthenelse{\boolean{papier}}{%	
+		\includepdf[pages=-,pagecommand=\thispagestyle{plain},scale=0.61,frame=true,offset=-29 50]{www/questionnaire}
+	}{%
+		\includepdf[pages=-,pagecommand=\thispagestyle{plain},scale=0.67,frame=true,offset=0 40]{www/questionnaire}
+	}
+}
+
+\mbox{}
+\vfill
+\noindent\includegraphics[width=\textwidth]{demarche_exp}
+\vfill
+\newpage
+
+\ifthenelse{\boolean{caco}}{%
+	\mbox{}
+	\vfill
+	\noindent\includegraphics[width=\textwidth]{718-revue-technologie-n177-p59}
+	
+	\label{demarcheSci}
+	\vfill
+	\mbox{}
+}{%
+	\centering
+	\noindent\includegraphics[height=\textheight]{718-revue-technologie-n177-p59}
+	
+	\label{demarcheSci}
+}

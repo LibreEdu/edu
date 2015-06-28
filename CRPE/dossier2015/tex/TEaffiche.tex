@@ -1,0 +1,34 @@
+\documentclass[12pt,a4paper,landscape]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[cm,empty]{fullpage}
+\usepackage{tabularx}
+\graphicspath{{../images/}}
+
+\parindent=0pt
+
+\begin{document}
+\Huge
+
+\newcommand{\largeur}{5cm}
+
+\begin{tabularx}{\textwidth}{%
+>{\centering\arraybackslash}p{\largeur}
+|>{\centering\arraybackslash}X
+|>{\centering\arraybackslash}X
+|>{\centering\arraybackslash}p{\largeur}
+}
+Je me demande & Je pense & J’observe & Je conclus \\ 
+\includegraphics{te1.png}& 
+\includegraphics{te2.png}& 
+\includegraphics{te3.png}& 
+\includegraphics{te4.png}\\ 
+\hline 
+\raisebox{0pt}[13cm][0pt] &  &  &  \\ 
+\end{tabularx}
+\tiny\vfill\hfill Photo: Manuel Strehl (Feux tricolores)
+\end{document}

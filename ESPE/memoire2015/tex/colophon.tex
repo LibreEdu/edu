@@ -1,0 +1,21 @@
+\ifthenelse{\boolean{caco}}{\newpage}{\clearemptydoublepage\thispagestyle{empty}}
+\def\grabtimezone #1#2#3#4#5#6#7#8#9{\grabtimezoneB}
+\def\grabtimezoneB #1#2#3#4#5#6#7{\grabtimezoneC}
+\def\grabtimezoneC #1#2'#3'{UTC#1#2\string:#3}
+\begin{center}
+\vspace*{0.1\textheight}
+{\Large \itshape Colophon}
+\vfill 
+\textcolor{DarkRed}{\Huge\aldine}\\[0.1\textheight]
+\normalsize
+\shapepar{\squareshape}
+Ce document, composé en \LaTeX{} avec la police de caractères \police{} en corps~\corps, a été compilé le \today{} à \thistime[\ h\ ]
+%    UTC+00\string:00.%sharelatex
+\expandafter\grabtimezone\pdfcreationdate.
+    
+\vspace*{0.1\textheight}
+Version 
+\ifthenelse{\boolean{papier}}{papier}{\ifthenelse{\boolean{caco}}{cacotypographique}{numérique}}
+\end{center}
+\vfill
+\mbox{}

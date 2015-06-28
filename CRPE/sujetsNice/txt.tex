@@ -1,0 +1,48 @@
+%Auteur
+\newcommand\txta[8]{%
+	\includepdf[pages=-,pagecommand={\thispagestyle{plain}},addtotoc={1,subsection,3,{#3 \textsc{#4} et #5 \textsc{#6}. #7. \textit{#8}},sujet#1_txt#2}]{TXT/sujet#1_txt#2}
+}
+
+%Page
+\newcommand\txtp[8]{%
+	\includepdf[pages={#7},pagecommand={\thispagestyle{plain}},addtotoc={#8,subsection,3,{#3 \textsc{#4}. #5. \textit{#6}},sujet#1_txt#2}]{TXT/sujet#1_txt#2}
+}
+
+\newcommand\txt[6]{%
+	\includepdf[pages=-,pagecommand={\thispagestyle{plain}},addtotoc={1,subsection,3,{#3 \textsc{#4}. #5. \textit{#6}},sujet#1_txt#2}]{TXT/sujet#1_txt#2}
+}
+
+%OrganisationPage
+\newcommand\txtop[6]{%
+	\includepdf[pages=#6,pagecommand={\thispagestyle{plain}},addtotoc={1,subsection,3,{#3. #4. \textit{#5}},sujet#1_txt#2}]{TXT/sujet#1_txt#2}
+}
+
+%Organisation
+\newcommand\txto[5]{%
+	\includepdf[pages=-,pagecommand={\thispagestyle{plain}},addtotoc={1,subsection,3,{#3. #4. \textit{#5}},sujet#1_txt#2}]{TXT/sujet#1_txt#2}
+}
+
+%NonDate
+\newcommand\txtnd[5]{%
+	\includepdf[pages=-,pagecommand={\thispagestyle{plain}},addtotoc={1,subsection,3,{#3 \textsc{#4}. \textit{#5}},sujet#1_txt#2}]{TXT/sujet#1_txt#2}
+}
+
+%NonAuteur
+\newcommand\txtna[4]{%
+	\includepdf[pages=-,pagecommand={\thispagestyle{plain}},addtotoc={1,subsection,3,{#3. \textit{#4}},sujet#1_txt#2}]{TXT/sujet#1_txt#2}
+}
+
+%LandscapeOrganisationNonDate
+\newcommand\txtlond[4]{%
+	\includepdf[pages=-,pagecommand={\thispagestyle{plain}},addtotoc={1,subsection,3,{#3. \textit{#4}},sujet#1_txt#2},landscape=true]{TXT/sujet#1_txt#2}
+}
+
+%OrganisationNonDate
+\newcommand\txtond[4]{%
+	\includepdf[pages=-,pagecommand={\thispagestyle{plain}},addtotoc={1,subsection,3,{#3. \textit{#4}},sujet#1_txt#2}]{TXT/sujet#1_txt#2}
+}
+
+%Titre
+\newcommand\txtt[3]{%
+	\includepdf[pages=-,pagecommand={\thispagestyle{plain}},addtotoc={1,subsection,3,{\textit{#3}},sujet#1_txt#2}]{TXT/sujet#1_txt#2}
+}

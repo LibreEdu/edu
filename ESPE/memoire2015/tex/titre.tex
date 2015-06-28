@@ -1,0 +1,11 @@
+\ifthenelse{\boolean{papier}}{%
+	\pagenumbering{alph}
+	\includepdf{tex/titreSerif}
+}{%
+	\ifthenelse{\boolean{caco}}{%
+		\includepdf{tex/titreSansSerifBinding}
+		}{%
+		\setcounter{page}{0}
+		\includepdf{tex/titreSansSerif}
+	}
+}

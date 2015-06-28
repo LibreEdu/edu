@@ -1,0 +1,51 @@
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fourier}
+\usepackage[svgnames]{xcolor}
+\usepackage{pdfpages}
+\usepackage{graphicx}
+\usepackage{shorttoc}
+\usepackage{apacite}
+\usepackage{scrtime}%heure système
+\usepackage{setspace}%interlignne
+\usepackage{shapepar}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{microtype}%meilleur réglage espaces typo
+\usepackage{ifthen}
+%\usepackage[left,modulo]{lineno}
+\usepackage{scrextend}%addmargin
+\usepackage[english,french]{babel}
+\graphicspath{{images/}}
+
+%\usepackage{showframe}
+%\usepackage{layout}
+%\usepackage{lipsum}
+
+\onehalfspacing
+
+\newcommand{\corps}{12}
+
+\newcommand{\clearemptydoublepage}{%
+\newpage{\pagestyle{empty}\cleardoublepage}}
+
+\newboolean{caco}
+\newboolean{papier}
+
+\newenvironment{caco}{%
+	\begin{addmargin}[4em]{0em}
+	\begin{singlespace}
+%	\linenumbers*
+	\vspace{.5em}
+}{%
+	\vspace{.5em}
+	\end{singlespace}
+	\end{addmargin}
+}
+
+\hypersetup{
+    pdftitle={La démarche d’investigation en maternelle},
+    pdfauthor={Pachot, Alexandre},
+    pdfsubject={L’enseignement des sciences en maternelle},
+    pdfkeywords={Éducation, sciences, maternelle, démarche d’investigation, La main à la pâte}
+}
