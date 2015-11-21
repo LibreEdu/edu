@@ -1,19 +1,22 @@
 \documentclass[12pt, a5paper, french]{memoir}
-\usepackage[bottom=91pt]{geometry}
+\usepackage{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{microtype}
 \usepackage{dramatist}
-\usepackage[modulo]{lineno}
+\usepackage{lineno}
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{babel}
+\usepackage{layout}
 
-\renewcommand{\actname}{Acte}
 \renewcommand{\scenename}{Scène}
-\renewcommand{\printscenenum}{\scenenumfont \thescene}
 \renewcommand{\casttitlename}{Personnages}
+\setlength{\beforesceneskip}{2em}%
+\renewcommand{\printscenenum}{\scenenumfont \thescene{} --}
+\renewcommand{\speakslabel}[1]{\textsc{#1}. ---}
+\setlength\linenumbersep{20pt}
 
 \makepagestyle{myps}
 \makeevenfoot{myps}{\thepage}{}{}
@@ -21,21 +24,6 @@
 
 \title{L'anneau de Gygès}
 \author{Libre Édu\thanks{Texte sous licence \href{http://creativecommons.org/licenses/by-sa/4.0/deed.fr}{CC BY-SA}, inspiré d’une fable racontée dans la \textit{République} de Platon.}}
-
-\hyphenation{Michel-angelo}
-
-\begin{document}
-\maketitle
-\vfill
-\begin{figure}[h]
-\centering
-\includegraphics[scale=1]{Gyges.jpg}
-\end{figure}
-\vfill
-\thispagestyle{empty}
-\newpage
-\renewcommand\contentsname{Sommaire}
-\tableofcontents*
 
 \Character[Gygès]{Gygès}{Gyges}
 \Character[Candaule, le roi]{Candaule}{Candaule}
@@ -49,36 +37,59 @@
 \Character[Michelangelo, un berger]{Michelangelo}{Michelangelo}
 \Character[Raffaello, un berger]{Raffaello}{Raffaello}
 \Character[Tiziano, un berger]{Tiziano}{Tiziano}
-   
-\DramPer*
-\pagestyle{myps}
-\linenumbers
-\scene
 
+\hyphenation{Michel-angelo}
+
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\vfill
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1]{Gyges.jpg}
+\end{figure}
+\vfill
+
+\newpage
+\renewcommand\contentsname{Sommaire}
+\tableofcontents*
+\thispagestyle{empty}
+
+\DramPer*
+\thispagestyle{empty}
+
+\newpage
+\pagestyle{myps}
+\begin{linenumbers}
+
+
+\scene[Un honnête homme]
 \StageDir{\Gyges, \Bonnie, \Clyde}
 \begin{drama}
 \Bonniespeaks Connais-tu la dernière nouvelle ?
 \Clydespeaks Quelle nouvelle ?
 \Bonniespeaks Le roi vient de s’acheter la dernière Nintendo, la 3DS~XXL.
-\Clydespeaks Comment sais-tu ça ?
+\Clydespeaks Comment tu sais ça ?
 \Bonniespeaks C’est écrit dans le journal. Si seulement tu savais lire\dots
 \Clydespeaks Pff ! Le journal, il suffit de le regarder à la télé !
 \Bonniespeaks Au lieu de dire des bêtises, dis-moi plutôt comment on va faire pour voler cette console.
-\Clydespeaks \direct{Apercevant quelqu’un au loin.} C’est qui là-bas ?
+\Clydespeaks Mais\dots{} c’est qui là-bas ?
 \Bonniespeaks C’est Gygès, au pied de son arbre, en train de surveiller ses chèvres.
-\Clydespeaks Allons le saluer. \direct{À Gygès.} Gygès, tu viens avec nous, on va élaborer un plan pour dérober la dernière console du roi.
+\Clydespeaks Allons le saluer. \direct{À Gygès.} Gygès, tu viens avec nous ? On va faire un plan pour voler la dernière console du roi.
 \Gygesspeaks Moi, Monsieur, je suis honnête, je respecte les lois, je ne vole pas.
-\Bonniespeaks Gygès, au lieu de faire le malin, réponds plutôt à la question suivante : tu ne voles pas, car tu as peur de te faire arrêter, ou parce que tu es l’incarnation même de la justice ? Si tu avais de super-pouvoirs tout en étant certain de ne pas te faire attraper, que ferais-tu ? Respecterais-tu la loi, ou pas ? Là, tu fais moins le malin ! Bon, je te laisse, moi j’ai du travail à faire, il faut qu’on trouve un plan pour s’emparer de cette console !
+\newpage
+\Bonniespeaks Gygès, au lieu de faire le malin, réponds plutôt à la question suivante. Tu ne voles pas, car tu as peur de te faire arrêter, ou parce que tu penses que c’est bien de respecter la loi ? Si tu avais de super-pouvoirs tout en étant certain de ne pas te faire attraper, que ferais-tu ? Respecterais-tu la loi, ou pas ?
 
-\scene
-
+\scene[L’anneau]
 \StageDir{\Gyges}
-\Gygesspeaks \direct{Scrutant le pied de l’arbre.} Un affaissement ? Je ne l’avais jamais remarqué. On dirait qu’il y a quelque chose au fond. Tiens, une boite ? Il y a un texte écrit dessus : \og Ô mortel, garde-toi d’envier le bonheur d’aucun autre homme. \fg{} \direct{Ouvre la boite.} Tout cela pour un anneau ! \direct{Passe la bague à son doigt, le chaton à l’extérieur.} Bon, rien ne se passe ! Ce n’est pas tout, mais il faut que je retourne au village, il y a le conseil des bergers.
+\Gygesspeaks Une crevasse ? Je ne l’avais jamais remarquée. On dirait qu’il y a quelque chose au fond. Tiens, une boite ? Il y a un texte écrit dessus : \og N’envie jamais le bonheur d’un autre homme. \fg{} \direct{Ouvre la boite.} Tiens, un anneau ! \direct{Passe l’anneau à son doigt, le chaton à l’extérieur.} Bon, rien ne se passe ! Ce n’est pas tout, mais il faut que je retourne au village, il y a le conseil des bergers.
+\newpage
 
-\scene
-
+\scene[Le messager]
 \StageDir{\Gyges, \Leonardo, \Donatello, \Michelangelo, \Raffaello, \Tiziano}
-\Leonardospeaks \direct{Apercevant Gygès} Gygès, dépêche-toi, cela fait des lustres qu’on t’attend. On n’a pas que ça à faire. J’ai des pommes de terre à éplucher.
+\Leonardospeaks Gygès, dépêche-toi, on n’a pas que ça à faire. J’ai des pommes de terre à éplucher.
 \Donatellospeaks Oh ! On est ici pour parler de chèvres, pas de patates !
 \Michelangelospeaks Bon. Qui va voir le roi pour faire un rapport sur l'état des troupeaux ?
 \Raffaellospeaks Pas moi.
@@ -88,33 +99,33 @@
 \Gygesspeaks \direct{À lui-même.} Je vais tourner le chaton de ma bague vers l’intérieur, voir ce que cela fait.
 \Leonardospeaks Il est où Gygès ? Saperlipopette, il a encore disparu.
 \Raffaellospeaks C’est vrai, ça. Il était encore là, il y a 5~secondes.
-\Gygesspeaks \direct{Tournant le chaton vers l’extérieur.} Les amis, c’est moi que vous cherchez ?
-\Tizianospeaks Ah ! Te voilà enfin de retour. Bon, nous avons décidé que c’est toi qui vas aller voir le roi pour lui faire un rapport sur nos troupeaux.
-\Gygesspeaks D’accord, je m’en vais de ce pas, voir le roi.
+\newpage
+\Gygesspeaks \direct{Tournant le chaton vers l’extérieur.} C’est moi que vous cherchez ?
+\Tizianospeaks Ah ! Te voilà enfin de retour. Bon, nous avons décidé que c’est toi qui iras voir le roi.
+\Gygesspeaks D’accord. Je m’en vais de ce pas le voir.
 
-\scene
-
+\scene[Nyssia]
 \StageDir{\Gyges, \Candaule, \Nyssia, \Laurel}
 \Laurelspeaks Votre Majesté, Gygès vient d’arriver.
 \Candaulespeaks Bien, faites-le entrer.
 \Gygesspeaks Votre Majesté.
 \Candaulespeaks Gygès, mon ami, comment vont les affaires ?
 \Gygesspeaks Bien.
-\Candaulespeaks Avant de parler affaires, il faut que je te présente ma nouvelle fiancée. Passe un peu de temps avec elle et dis-moi ce que tu en penses.
-\Gygesspeaks Votre Majesté, cela serait indécent\dots
-\Candaulespeaks J’insiste. \direct{À Nyssia.} Nyssia, viens voir ici. Je dois partir, j’ai des affaires à régler. Je te présente Gygès, un ami qui va te tenir compagnie pour le diner.
+\Candaulespeaks Avant de parler affaires, il faut que je te présente ma fiancée. Passe un peu de temps avec elle et dis-moi ce que tu en penses.
+\Gygesspeaks Votre Majesté, cela ne se fait pas\dots
+\Candaulespeaks J’insiste. \direct{À Nyssia.} Nyssia, viens voir ici. Je dois partir, j’ai des affaires à régler. Je te présente Gygès, un ami, qui va te tenir compagnie pour le diner.
+\newpage
 
-\scene
-
+\scene[L’assassinat]
 \StageDir{\Gyges, \Nyssia, \Hardy}
-\Gygesspeaks \direct{À lui-même.} J’ai bien mangé. Il en a de la chance le roi, d’épouser une si belle fille. Je l’envie.
-\Hardyspeaks \direct{À Nyssia.} Mon altesse, je viens d’apprendre que le roi est furieux de la conduite de Gygès. Il veut le tuer.
+\Gygesspeaks \direct{À lui-même.} J’ai bien mangé. Il en a de la chance le roi, d’épouser une si belle dame. Je l’envie.
+\Hardyspeaks Madame, je viens d’apprendre que le roi est furieux de la conduite de Gygès. Il veut le tuer.
 \Nyssiaspeaks Vite, va prévenir Gygès du sort qui l’attend.
-\Hardyspeaks \direct{À Gygès.} Monsieur, vous courez un grand danger, le roi veut votre mort.
+\Hardyspeaks Monsieur, vous courez un grand danger, le roi veut votre mort.
 \Gygesspeaks Ha ! Le scélérat ! Je vais utiliser mon anneau d’invisibilité pour le tuer pendant son sommeil.
+\newpage
 
-\scene
-
+\scene[La question]
 \StageDir{\Bonnie, \Clyde}
 \Bonniespeaks Connais-tu la dernière nouvelle ?
 \Clydespeaks Quelqu’un a volé la console du roi ?
@@ -122,16 +133,20 @@
 \Clydespeaks Le roi est mort, vive le roi !
 \Bonniespeaks Mais cela ne répond pas à la question.
 \Clydespeaks Quelle question ?
-\Bonniespeaks Si l’on était protégé de la conséquence de nos actes, est-ce qu’on agirait de la même manière ?
+\Bonniespeaks Imagine que, lorsque tu fais une très grosse bêtise, tu sais d’avance qu’on ne pourra jamais savoir que c’est toi l’auteur de la bêtise. Que ferais-tu ? Bêtise, ou pas bêtise ? Faire ou ne pas faire, telle est la question.
+
 \end{drama}
+\end{linenumbers}
 
-\hfill
 \centering
-
+\vfill
 \textsc{Fin}
+\vfill
+\thispagestyle{empty}
+
 \end{document}
 
-
+Références :
 http://cache.media.eduscol.education.fr/file/EMC/24/4/Ress_emc_discussion_liberte-lois_464244.pdf
 https://fr.wikipedia.org/wiki/Anneau_de_Gygès
 https://fr.wikipedia.org/wiki/Candaule
