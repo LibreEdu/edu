@@ -1,0 +1,40 @@
+\section{Séquence pédagogique}
+\subsection{Textes officiels}
+Sur la page \og L’enseignement des sciences \fg{}\footnote{\url{http://www.education.gouv.fr/cid54197/l-enseignement-des-sciences.html} (mise à jour en février~2016)} du site internet du ministère de l’Éducation nationale, de l’Enseignement supérieur et de la Recherche, il est précisé que \og \textbf{Dès l’école maternelle, les enfants sont initiés à la démarche d’investigation} qui développe la curiosité, la créativité, l’esprit critique et l’intérêt pour le progrès scientifique et technique. \fg{}
+
+Dans le programme d’enseignement de l’école maternelle \cite{BO2015} qui est en vigueur depuis la rentrée scolaire~2015, le cinquième et dernier domaine se nomme \og \textbf{Explorer le monde} \fg{} avec pour sous-domaines \og Se repérer dans le temps et l’espace \fg{} et \og Explorer le monde du vivant, des objets et de la matière \fg{}. C’est dans ce deuxième sous-domaine que nous allons nous situer, et plus précisément en \og Découvrir le monde vivant \fg{} où il est précisé que les enfants commencent à comprendre ce qui distingue le vivant du non-vivant et que l’enseignant les conduits à observer les différentes manifestations de la vie végétale. Il est attendu que les enfants savent, à la fin de l’école maternelle, \textbf{reconnaitre les principales étapes du développement d’un végétal}, dans une situation d’observation du réel ou sur une image.
+
+\subsection{Séquence}
+\newcounter{NbSeance}
+\newcounter{DureeTotale}
+\newcounter{DureeTotaleHeure}
+\newcounter{DureeTotaleMinutes}
+
+\makeatletter
+\ifx\NbSeancestocke\@undefined\relax\else\setcounter{NbSeance}{\NbSeancestocke}\fi
+\ifx\DureeTotalestockee\@undefined\relax\else\setcounter{DureeTotale}{\DureeTotalestockee}\fi
+\makeatother
+
+\setcounter{DureeTotaleHeure}{\value{DureeTotale}/60}
+\setcounter{DureeTotaleMinutes}{\value{DureeTotale}-\value{DureeTotaleHeure}*60}%
+
+\begin{description}
+\item[Titre :] La germination
+\item[Niveau :] Petite et moyenne section
+\item[Période :] 1 ou 2
+\item[Domaine :] Explorer le monde.
+\item[Sous-domaine :] Découvrir le monde vivant.
+\item[Compétence\footnotemark{} (B.O. 2015)	 :]\footnotetext{Aptitude à mobiliser ses ressources (connaissances, capacités, attitudes) pour accomplir une tâche ou faire face à une situation complexe ou inédite (Socle commun de connaissances, de compétences et de culture, 2015).} Reconnaitre les principales étapes du développement d’un végétal, dans une situation d’observation
+du réel ou sur une image.
+\item[Prérequis :] Savoir ce qu’est une plante et un arbre.
+\item[Objectif :] Savoir que les graines germent et pas le reste.
+\item[Nombre de séances :] \theNbSeance
+\item[Durée totale :] 
+\ifnum\value{DureeTotaleHeure}=0 %laisser un espace après 0
+\theDureeTotaleMinutes{}~min
+\else\theDureeTotaleHeure{}~h 
+	\ifnum\value{DureeTotaleMinutes}=0 %
+	\else\theDureeTotaleMinutes
+	\fi
+\fi
+\end{description}
