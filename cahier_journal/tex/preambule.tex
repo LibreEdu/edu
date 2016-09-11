@@ -1,0 +1,124 @@
+%\usepackage[a4paper]{geometry}
+\usepackage[a4paper,bmargin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage{lmodern}
+%\usepackage{fourier}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{microtype}
+\usepackage{shorttoc}
+\usepackage[colorlinks]{hyperref}
+\usepackage[svgnames]{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{datetime2}
+\usepackage[french]{babel}
+
+%\usepackage{layout}
+%\usepackage{showframe}
+%\usepackage{lipsum}
+
+\title{Cahier journal}
+\author{2016-2017}
+\setlength\parindent{0pt}
+\pagestyle{fancy}
+\lhead{Cahier journal 2016-2017}
+\chead{}
+\rhead{\DTMnow}
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+\titleformat*{\subsection}{\large\bfseries\color{DarkBlue}}
+
+\newcommand{\heure}[1]{\marginpar{\begin{flushright}#1\end{flushright}}}
+\newcommand{\ham}{\heure{8 h 45} }
+\newcommand{\amr}{\heure{10 h 20} }
+\newcommand{\hpm}{\heure{14 h 00} }
+
+\newcommand{\discipline}[2]{\colorbox{#2}{\textbf{#1}} }
+\newcommand{\lun}{Lundi }
+\newcommand{\mar}{Mardi }
+\newcommand{\mer}{Mercredi }
+\newcommand{\jeu}{Jeudi }
+\newcommand{\ven}{Vendredi }
+\newcommand{\sep}{septembre}
+\newcommand{\obj}{
+	
+	\textbf{Objectif } }
+\newcommand{\bil}{
+	
+	\textbf{Bilan } }
+\newcommand{\gdc}{
+	
+	\textbf{Gestion de classe } }
+\newcommand{\adm}{
+	
+	\textbf{Administratif } }
+
+\newcommand{\frCouleur}{cyan}
+\newcommand{\lec}{
+	
+	\discipline{Lecture et compréhension de l’écrit}{\frCouleur}}
+\newcommand{\voc}{
+	
+	\discipline{Vocabulaire}{\frCouleur}}
+\newcommand{\ecr}{
+	
+	\discipline{Écriture}{\frCouleur}}
+\newcommand{\gra}{
+	
+	\discipline{Grammaire}{\frCouleur}}
+\newcommand{\ort}{
+	
+	\discipline{Orthographe}{\frCouleur}}
+\newcommand{\jdl}{
+	
+	\discipline{Jeux de langue}{\frCouleur}}
+
+
+\newcommand{\maCouleur}{GreenYellow}
+\newcommand{\nec}{
+	
+	\discipline{Nombres et calculs}{\maCouleur}}
+\newcommand{\gem}{
+	
+	\discipline{Grandeurs et mesures}{\maCouleur}}
+\newcommand{\eeg}{
+	
+	\discipline{Espace et géométrie}{\maCouleur}}
+\newcommand{\jma}{
+	
+	\discipline{Jeux maths}{\maCouleur}}
+\newcommand{\rdp}{
+	
+	\discipline{Résolution de problèmes}{\maCouleur}}
+
+
+\newcommand{\hgCouleur}{Orange}
+\newcommand{\his}{
+	
+	\discipline{Histoire}{\hgCouleur}}
+\newcommand{\geo}{
+	
+	\discipline{Géographie}{\hgCouleur}}
+\newcommand{\emc}{
+	
+	\discipline{Enseignement moral et civique	}{\hgCouleur}}
+
+
+\newcommand{\ang}{
+	
+	\discipline{Anglais}{Red}}
+\newcommand{\eps}{
+	
+	\discipline{Éducation physique et sportive}{Magenta}}
+\newcommand{\sci}{
+	
+	\discipline{Sciences et technologie}{Yellow}}
+\newcommand{\art}{
+	
+	\discipline{Enseignements artistiques}{Violet}}
+\newcommand{\ppd}{
+	
+	\discipline{Projet pluridisciplinaire}{Salmon}}
