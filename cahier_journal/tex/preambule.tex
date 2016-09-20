@@ -6,6 +6,7 @@
 \renewcommand{\familydefault}{\sfdefault}
 \usepackage{microtype}
 \usepackage[svgnames]{xcolor}
+\usepackage{fontawesome}
 \usepackage[french]{babel}
 
 %\usepackage{layout}
@@ -14,7 +15,7 @@
 
 \setlength\parindent{0pt}
 
-\newcommand{\heure}[1]{\marginpar{\begin{flushright}#1\end{flushright}}\vspace{1.3ex}}
+\newcommand{\heure}[1]{\marginpar{\begin{flushright}#1\end{flushright}}\vspace{1.7ex}}
 \newcommand{\ham}{\heure{8 h 45} }
 \newcommand{\han}{\heure{9 h 30} }
 \newcommand{\amr}{\heure{10 h 20} }
@@ -32,10 +33,10 @@
 
 \newcommand{\obj}{
 	
-	\textbf{Objectif } }
+	\textbf{Objectif :}\heure{\faBullseye{}} }
 \newcommand{\bil}{
 	
-	\textbf{Bilan } }
+	\textbf{Bilan :}\heure{\faStethoscope{}} }
 
 \newcommand{\diversCouleur}{Gainsboro}
 \newcommand{\gdc}{
@@ -50,9 +51,12 @@
 \newcommand{\gec}{
 	
 	\discipline{Gestion de conflit}{\diversCouleur} }
-\newcommand{\dev}{\discipline{Devoirs}{white} }
+\newcommand{\dev}{\textbf{Devoirs :}\heure{\faHome{}}}
+%\newcommand{\dev}{
+%	
+%	\discipline{Devoirs}{white}\heure{\faHome{}} }
 
-
+%\discipline{\Coffeecup}{white}\heure{8 h 35} 
 
 \newcommand{\frCouleur}{cyan}
 \newcommand{\lec}{
