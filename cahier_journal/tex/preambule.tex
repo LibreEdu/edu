@@ -29,17 +29,18 @@
 	#1}
 
 \newcommand{\mrg}[2]{\marginpar{\begin{flushright}\colorbox{#1}{#2}\end{flushright}}}
+\newcommand{\msb}[1]{\marginpar{\begin{flushright}#1\end{flushright}}}
 \newcommand{\hre}[2]{\mrg{white}{#1 h #2}}
 \newcommand{\hrb}[2]{\marginpar{\begin{flushright}\bcb{\cge}{#1 h #2}\end{flushright}}}
 
-\newcommand{\dev}{\textbf{Devoirs : }\mrg{white}{\faHome}}
-\newcommand{\nte}{\sdl\textbf{Note : }\mrg{white}{\faPencil}}
-\newcommand{\obj}{\sdl\textbf{Objectif : }\mrg{white}{\faBullseye}}
-\newcommand{\bil}{\sdl\textbf{Bilan : }\mrg{white}{\faStethoscope}}
-\newcommand{\cdj}[2]{\sdl\textbf{Cahier du jour : }\mrg{white}{\faLeanpub} Ex. #1 p. #2.}
-\newcommand{\ces}[2]{\sdl\textbf{Cahier d’essai : }\mrg{white}{\faBook} Ex. #1 p. #2.}
-\newcommand{\ard}[2]{\sdl\textbf{Ardoise : }\mrg{white}{\faTablet} Ex. #1 p. #2.}
-\newcommand{\Ard}{\sdl\textbf{Ardoise : }\mrg{white}{\faTablet}}
+\newcommand{\dev}{\textbf{Devoirs : }\msb\faHome}
+\newcommand{\nte}{\sdl\textbf{Note : }\msb\faPencil}
+\newcommand{\obj}{\sdl\textbf{Objectif : }\msb\faBullseye}
+\newcommand{\bil}{\sdl\textbf{Bilan : }\msb\faStethoscope}
+\newcommand{\cdj}[2]{\sdl\textbf{Cahier du jour : }\msb\faLeanpub Ex. #1 p. #2.}
+\newcommand{\ces}[2]{\sdl\textbf{Cahier d’essai : }\msb\faBook Ex. #1 p. #2.}
+\newcommand{\ard}[2]{\sdl\textbf{Ardoise : }\msb\faTablet Ex. #1 p. #2.}
+\newcommand{\Ard}{\sdl\textbf{Ardoise : }\msb\faTablet}
 
 
 \newcommand{\dis}[6]{\sdl{\bcb{#1}{#2}}\hre{#3}{#4} \textit{#5}, p.~#6.}
