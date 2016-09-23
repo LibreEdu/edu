@@ -15,112 +15,74 @@
 
 \setlength\parindent{0pt}
 
-\newcommand{\heure}[1]{\marginpar{\begin{flushright}#1\end{flushright}}\vspace{1.7ex}}
-\newcommand{\ham}{\heure{8 h 45} }
-\newcommand{\han}{\heure{9 h 30} }
-\newcommand{\amr}{\heure{10 h 20} }
-\newcommand{\hpm}{\heure{14 h 00} }
-\newcommand{\pmr}{\heure{15 h 20} }
-
-\newcommand{\discipline}[2]{\colorbox{#2}{\textbf{#1}} }
-%\newcommand{\discipline}[2]{\textbullet{} \colorbox{#2}{\textbf{#1}} }
 \newcommand{\lun}{Lundi }
 \newcommand{\mar}{Mardi }
 \newcommand{\mer}{Mercredi }
 \newcommand{\jeu}{Jeudi }
 \newcommand{\ven}{Vendredi }
 
+\newcommand{\sep}{septembre 2016}
 
-\newcommand{\obj}{
+\newcommand{\bcb}[2]{\colorbox{#1}{\textbf{#2}} }
+\newcommand{\sdl}[1]{
 	
-	\textbf{Objectif :}\heure{\faBullseye{}} }
-\newcommand{\bil}{
-	
-	\textbf{Bilan :}\heure{\faStethoscope{}} }
+	#1}
 
-\newcommand{\diversCouleur}{Gainsboro}
-\newcommand{\gdc}{
-	
-	\discipline{Gestion de classe}{\diversCouleur} }
-\newcommand{\adm}{
-	
-	\discipline{Administratif}{\diversCouleur} }
-\newcommand{\clc}{
-	
-	\discipline{Classcraft}{\diversCouleur} }
-\newcommand{\gec}{
-	
-	\discipline{Gestion de conflit}{\diversCouleur} }
-\newcommand{\dev}{\textbf{Devoirs :}\heure{\faHome{}}}
-%\newcommand{\dev}{
-%	
-%	\discipline{Devoirs}{white}\heure{\faHome{}} }
+\newcommand{\mrg}[2]{\marginpar{\begin{flushright}\colorbox{#1}{#2}\end{flushright}}}
+\newcommand{\hre}[2]{\mrg{white}{#1 h #2}}
+\newcommand{\hrb}[2]{\marginpar{\begin{flushright}\bcb{\cge}{#1 h #2}\end{flushright}}}
 
-%\discipline{\Coffeecup}{white}\heure{8 h 35} 
-
-\newcommand{\frCouleur}{cyan}
-\newcommand{\lec}{
-	
-	\discipline{Lecture et compréhension de l’écrit}{\frCouleur}}
-\newcommand{\voc}{
-	
-	\discipline{Vocabulaire}{\frCouleur}}
-\newcommand{\ecr}{
-	
-	\discipline{Écriture}{\frCouleur}}
-\newcommand{\gra}{
-	
-	\discipline{Grammaire}{\frCouleur}}
-\newcommand{\ort}{
-	
-	\discipline{Orthographe}{\frCouleur}}
-\newcommand{\jdl}{
-	
-	\discipline{Jeux de langage}{\frCouleur}}
+\newcommand{\dev}{\textbf{Devoirs : }\mrg{white}{\faHome}}
+\newcommand{\nte}{\sdl\textbf{Note : }\mrg{white}{\faPencil}}
+\newcommand{\obj}{\sdl\textbf{Objectif : }\mrg{white}{\faBullseye}}
+\newcommand{\bil}{\sdl\textbf{Bilan : }\mrg{white}{\faStethoscope}}
+\newcommand{\cdj}[2]{\sdl\textbf{Cahier du jour : }\mrg{white}{\faLeanpub} Ex. #1 p. #2.}
+\newcommand{\ces}[2]{\sdl\textbf{Cahier d’essai : }\mrg{white}{\faBook} Ex. #1 p. #2.}
+\newcommand{\ard}[2]{\sdl\textbf{Ardoise : }\mrg{white}{\faTablet} Ex. #1 p. #2.}
+\newcommand{\Ard}{\sdl\textbf{Ardoise : }\mrg{white}{\faTablet}}
 
 
-\newcommand{\maCouleur}{GreenYellow}
-\newcommand{\nec}{
-	
-	\discipline{Nombres et calculs}{\maCouleur}}
-\newcommand{\gem}{
-	
-	\discipline{Grandeurs et mesures}{\maCouleur}}
-\newcommand{\eeg}{
-	
-	\discipline{Espace et géométrie}{\maCouleur}}
-\newcommand{\jma}{
-	
-	\discipline{Jeux maths}{\maCouleur}}
-\newcommand{\rdp}{
-	
-	\discipline{Résolution de problèmes}{\maCouleur}}
+\newcommand{\dis}[6]{\sdl{\bcb{#1}{#2}}\hre{#3}{#4} \textit{#5}, p.~#6.}
+\newcommand{\Dis}[5]{\sdl{\bcb{#1}{#2}}\hre{#3}{#4} \textit{#5}.}
+\newcommand{\dIs}[4]{\sdl{\bcb{#1}{#2}}\hre{#3}{#4}}
 
+\newcommand{\cge}{Gainsboro}
+\newcommand{\gdc}{Gestion de classe}
+\newcommand{\adm}{Administratif}
+\newcommand{\clc}{Classcraft}
+\newcommand{\gec}{Gestion de conflit}
 
-\newcommand{\hgCouleur}{Orange}
-\newcommand{\his}{
-	
-	\discipline{Histoire}{\hgCouleur}}
-\newcommand{\geo}{
-	
-	\discipline{Géographie}{\hgCouleur}}
-\newcommand{\emc}{
-	
-	\discipline{Enseignement moral et civique}{\hgCouleur}}
+\newcommand{\cfr}{cyan}
+\newcommand{\lec}{Lecture et compréhension de l’écrit}
+\newcommand{\voc}{Vocabulaire}
+\newcommand{\ecr}{Écriture}
+\newcommand{\gra}{Grammaire}
+\newcommand{\ort}{Orthographe}
+\newcommand{\jdl}{Jeux de langage}
 
+\newcommand{\cma}{GreenYellow}
+\newcommand{\nec}{Nombres et calculs}
+\newcommand{\gem}{Grandeurs et mesures}
+\newcommand{\eeg}{Espace et géométrie}
+\newcommand{\jma}{Jeux maths}
+\newcommand{\rdp}{Résolution de problèmes}
 
-\newcommand{\ang}{
-	
-	\discipline{Anglais}{Red}}
-\newcommand{\eps}{
-	
-	\discipline{Éducation physique et sportive}{Magenta}}
-\newcommand{\sci}{
-	
-	\discipline{Sciences et technologie}{Yellow}}
-\newcommand{\art}{
-	
-	\discipline{Enseignements artistiques}{Violet}}
-\newcommand{\ppd}{
-	
-	\discipline{Projet pluridisciplinaire}{Salmon}}
+\newcommand{\chg}{Orange}
+\newcommand{\his}{Histoire}
+\newcommand{\geo}{Géographie}
+\newcommand{\emc}{Enseignement moral et civique}
+
+\newcommand{\cen}{Red}
+\newcommand{\eng}{Anglais}
+
+\newcommand{\csp}{Magenta}
+\newcommand{\eps}{Éducation physique et sportive}
+
+\newcommand{\csi}{Yellow}
+\newcommand{\sci}{Sciences et technologie}
+
+\newcommand{\car}{Violet}
+\newcommand{\art}{Enseignements artistiques}
+
+\newcommand{\cpr}{Salmon}
+\newcommand{\ppd}{Projet pluridisciplinaire}
